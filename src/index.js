@@ -6,9 +6,13 @@ let timerRoute = require('./routes/timer');
 
 let path = require('path');
 
+let bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
 // Logs a message to the console when a request is made
 app.use((req, res, next) => {
-    console.log(`${new Date().toString()} => ${req.originalUrl}`);
+    console.log(`${new Date().toString()} => ${req.originalUrl}`, req.body);
     next();
 });
 
