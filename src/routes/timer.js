@@ -17,6 +17,10 @@ router.get('/timer/:name', (req, res) => {
     res.send(`You have requested a timer ${req.params.name}`);
 });
 
+router.get('/error', (req, res) => {
+    throw new Error('This is a forced error.');
+})
+
 
 
 module.exports = router;
