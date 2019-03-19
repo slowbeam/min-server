@@ -10,6 +10,7 @@ router.get('/timer', (req, res) => {
         res.send('You have requested a timer');
     }
 });
+
 // Params property on the request object
 // localhost:3000/timer/sandy
 router.get('/timer/:name', (req, res) => {
