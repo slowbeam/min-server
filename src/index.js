@@ -28,26 +28,6 @@ app.use((req, res, next) => {
 app.use(timerRoute);
 app.use(userRoute);
 
-app.post("/timers", (req, res) => {
-    collection = database.collection("timers");
-    collection.insertOne(req.body, (error, result) => {
-        if(error) {
-            return res.status(500).send(error);
-        }
-        res.send(result.result);
-    });
-});
-
-app.get("/timers", (req, res) => {
-    collection = database.collection("timers");
-    collection.find({}).toArray((error, result) => {
-        if (error) {
-            return res.status(500).send(error);
-        }
-        res.send(result);
-    });
-});
-
 // Serves the API via the public folder's index.html
 app.use(express.static('public'));
 
@@ -68,13 +48,7 @@ let database, collection;
 // Begins local server on specified port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
-        if(error) {
-            throw error;
-        }
-        database = client.db(DATABASE_NAME);
-        console.log("Connected to `" + DATABASE_NAME + "`!");
-    })
+        console.log("Server started on port " + PORT + "!");   
 });
 
 
