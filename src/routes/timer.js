@@ -1,19 +1,20 @@
-let express = require('express');
-let router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
+const router = require('express').Router();
+const timerController = require("../controllers/timers.controller");
 
-// Connects to the MongoDB Atlas database "timers" collection
-const CONNECTION_URL = "mongodb+srv://slowbeam:C0d3lyf3@min-server-vvox5.mongodb.net/test?retryWrites=true";
-const DATABASE_NAME = "test";
-let database, collection;
-MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
-    if(error) {
-        throw error;
-    }
-    database = client.db(DATABASE_NAME);
-    collection = database.collection("timers");
-    console.log("Connected to timers!");
-});
+// const MongoClient = require('mongodb').MongoClient;
+
+// // Connects to the MongoDB Atlas database "timers" collection
+// const CONNECTION_URL = "mongodb+srv://slowbeam:C0d3lyf3@min-server-vvox5.mongodb.net/test?retryWrites=true";
+// const DATABASE_NAME = "test";
+// let database, collection;
+// MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
+//     if(error) {
+//         throw error;
+//     }
+//     database = client.db(DATABASE_NAME);
+//     collection = database.collection("timers");
+//     console.log("Connected to timers!");
+// });
 
 // Post route for adding a new timer obj to the db
 router.post("/timers", (req, res) => {
