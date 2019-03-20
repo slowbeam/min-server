@@ -38,6 +38,15 @@ app.post("/timers", (req, res) => {
     });
 });
 
+app.get("/timers", (req, res) => {
+    collection = database.collection("timers");
+    collection.find({}).toArray((error, result) => {
+        if (error) {
+            return res.status(500).send(error);
+        }
+        res.send(result);
+    });
+});
 
 // Serves the API via the public folder's index.html
 app.use(express.static('public'));
