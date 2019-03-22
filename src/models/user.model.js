@@ -1,16 +1,20 @@
 let mongoose = require('mongoose');
-// let mongodb = require('mongodb');
+const Schema = mongoose.Schema;
 
-// const uri = "mongodb+srv://slowbeam:C0d3lyf3@min-server-vvox5.mongodb.net/test?retryWrites=true";
-
-// mongoose.connect(uri);
-
-let UserSchema = new mongoose.Schema({
-    name: String,
+let UserSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true
+    },
+    password: {
+        type: String,
+        required: true
     }
 })
 
