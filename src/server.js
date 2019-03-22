@@ -11,7 +11,10 @@ const mongoDB = process.env.MONGODB_URI || require("./config/keys").mongoURI;
 
 mongoose.connect(
     mongoDB,
-    { useNewUrlParser: true }
+    { 
+        useNewUrlParser: true,
+        useFindAndModify: false
+     }
 );
 
 // Body parser middleware

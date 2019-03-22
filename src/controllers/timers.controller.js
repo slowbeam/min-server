@@ -28,7 +28,7 @@ exports.createTimer = (req, res) => {
     }
     let timerFields = {};
 
-    timerFields.user = req.user;
+    timerFields.user = req.body.user;
     timerFields.currentTime = req.body.currentTime;
     timerFields.intervalNum = req.body.intervalNum;
     timerFields.timerHours = req.body.timerHours;
@@ -43,10 +43,29 @@ exports.updateTimer = (req, res) => {
     Timer.findById(req.params.timer_id).then(timer => {
         let timerFields = {};
 
-        timerFields.content = req.body.content;
+      
 
-        Timer.findOneAndUpdate(
-            { user: req.user.id},
+        if (req.body.user){
+            timerFields.user = req.body.user;
+        }
+        if (req.body.currentTime) {
+            timerFields.currentTime = req.body.currentTime; 
+        }
+        if (req.body.intervalNum) {
+            timerFields.intervalNum = req.body.intervalNum; 
+        }
+        if (req.body.timerHours) {
+            timerFields.timerHours = req.body.timerHours; 
+        }
+        if (req.body.timerMinutes) {
+            timerFields.timerMinutes = req.body.timerMinutes; 
+        }
+        if (req.body.timerSeconds) {
+            timerFields.timerSeconds = req.body.timerSeconds; 
+        }
+
+        Timer.findByIdAndUpdate(
+            req.params.timer_id,
             { $set: timerFields },
             { new: true }
         ).then(timer => res.json(timer));
