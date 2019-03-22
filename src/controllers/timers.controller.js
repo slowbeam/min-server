@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Timer = require("../models/timer.model.js");
+const validateTimerInput = require("../validations/timer.validation");
 
 // Public Route: GET 'api/v1/timers'
 exports.getTimers = (req, res) => {
@@ -28,7 +29,11 @@ exports.createTimer = (req, res) => {
     let timerFields = {};
 
     timerFields.user = req.user.id;
-    timerFields.content = req.body.content;
+    timerFields.currentTime = req.body.currentTime;
+    timerFields.intervalNum = req.body.intervalNum;
+    timerFields.timerHours = req.body.timerHours;
+    timerFields.timerMinutes = req.body.timerMinutes;
+    timerFields.timerSeconds = req.body.timerSeconds;
 
     new Timer(timerFields).save().then(timer => res.json(timer));
 };
