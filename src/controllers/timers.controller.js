@@ -28,7 +28,7 @@ exports.createTimer = (req, res) => {
     }
     let timerFields = {};
 
-    timerFields.user = req.user.id;
+    timerFields.user = req.user;
     timerFields.currentTime = req.body.currentTime;
     timerFields.intervalNum = req.body.intervalNum;
     timerFields.timerHours = req.body.timerHours;

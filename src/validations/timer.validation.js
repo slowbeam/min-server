@@ -4,11 +4,16 @@ const isEmpty = require('./isEmpty');
 module.exports = function validateTimerInput(input) {
     let errors = {};
 
+    input.user = !isEmpty(input.user) ? input.user : "";
     input.currentTime = !isEmpty(input.currentTime) ? input.currentTime : "";
     input.intervalNum = !isEmpty(input.intervalNum) ? input.intervalNum : "";
     input.timerHours = !isEmpty(input.timerHours) ? input.timerHours : "";
     input.timerMinutes = !isEmpty(input.timerMinutes) ? input.timerMinutes : "";
     input.timerSeconds = !isEmpty(input.timerSeconds) ? input.timerSeconds : "";
+
+    if (validator.isEmpty(input.user)) {
+        errors.currentTime = "User field is required";
+    }
 
     if (validator.isEmpty(input.currentTime)) {
         errors.currentTime = "Current time field is required";
