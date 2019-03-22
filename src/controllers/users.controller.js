@@ -39,4 +39,38 @@ exports.createUser = (req, res) => {
 };
 
 // Public Route 'api/users/login'
+exports.logInUser = (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
 
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    let email = req.body.email;
+    let password = req.body.password;
+
+    User.findOne({ email }).then(user => {
+        if (!user) {
+            errors.email = "User not found";
+            return res.status(404).json(errors);
+        }
+
+        bcrypt.compare(password, user.password).then(checkPassword => {
+            if (checkPassword) {
+                let payload = {
+                    id: user.id,
+                    name: user.name
+                };
+
+                jwt.sign(payload, keys.secretOrKey, (err, token) => {
+                    res.json({
+                        token: "Bearer " + token
+                    });
+                });
+            } else {
+                errors.password = "Password is incorrect";
+                return res.status(400).json(errors);
+            }
+        });
+    });
+};
