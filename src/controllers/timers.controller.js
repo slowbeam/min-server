@@ -55,7 +55,7 @@ exports.updateTimer = (req, res) => {
 
 // Private Route: DELETE 'api/v1/timers/:timer_id'
 exports.deleteTimer = (req, res) => {
-    Timer.findOneAndDelete({ _id: req.params.post_id})
+    Timer.findOneAndDelete({ _id: req.params.timer_id})
     .then(timer => res.json(timer))
     .catch(err => res.status(404).json({ notFound: "Did not find timer for this ID"}));
 };
