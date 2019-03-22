@@ -1,12 +1,12 @@
-const User = require("../models/User");
-const bcrypt = require("bcryptjs")
+const User = require("../models/user.model");
+const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
 
 const validateLoginInput = require("../validations/login.validation");
 const validateSignUpInput = require("../validations/signup.validation");
 
-// Public Route: POST 'api/users'
+// Public Route: POST 'api/v1/users'
 exports.createUser = (req, res) => {
     const { errors, isValid } = validateSignUpInput(req.body);
 
@@ -38,7 +38,7 @@ exports.createUser = (req, res) => {
     });
 };
 
-// Public Route 'api/users/login'
+// Public Route 'api/v1/users/login'
 exports.logInUser = (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
 
@@ -72,5 +72,28 @@ exports.logInUser = (req, res) => {
                 return res.status(400).json(errors);
             }
         });
+    });
+};
+
+// Public Route: GET 'api/v1/users'
+exports.getUsers = (req, res) => {
+    let errors = {};
+    User.find()
+        .then(users => {
+            if (!users) {
+                errors.noUser = "There are no users";
+                return res.status(404).json(errors);
+            }
+            res.json(users);
+        })
+        .catch(err => res.status(404).json({ user: "There are no users"}));
+};
+
+// Private Route: 'api/v1/users/current'
+exports.getCurrentUser = (req, res) => {
+    res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
     });
 };

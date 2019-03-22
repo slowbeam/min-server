@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const users = require('./routes/users.route');
 const timers = require('./routes/timers.route');
 
 // MongoDB connection
@@ -31,6 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.use('/api/v1/users', users);
 app.use("/api/v1/timers", timers);
 
 // Serves the API via the public folder's index.html
