@@ -21,7 +21,7 @@ module.exports = function validateSignUpInput(input) {
         errors.email = "Email field is required";
     }
 
-    if (validator.isEmail(input.email)) {
+    if (!validator.isEmail(input.email)) {
         errors.email = "Email field is invalid";
     }
 
