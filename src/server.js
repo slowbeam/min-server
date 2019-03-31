@@ -15,8 +15,9 @@ mongoose.connect(
     mongoDB,
     { 
         useNewUrlParser: true,
-        useFindAndModify: false
-     }
+        useFindAndModify: false,
+        useCreateIndex: true
+    }
 );
 
 // Body parser middleware
