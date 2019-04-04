@@ -10,9 +10,9 @@ exports.getTimers = async (req, res) => {
 // Public Route: GET 'api/v1/timers/:id'
 exports.getTimer = async (req, res) => {
     const timer = await Timer.findById(req.params.id);
-
+    
     if (!timer) res.status(404).send("The title with the provided ID was not found.");
-    res.send(timer);
+    res.send(timer);  
 };
 
 // Private Route: POST 'api/v1/timers'
@@ -45,7 +45,7 @@ exports.createTimer = async (req, res) => {
         isLongBreak: req.body.isLongBreak,
         pomCount: req.body.pomCount
     })
-
+    
     timer = await timer.save();
     res.send(timer);
 };
