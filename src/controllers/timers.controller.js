@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
 const {Timer, validate} = require("../models/timer.model.js");
+const { User } = require("../models/user.model.js");
 
 // Public Route: GET 'api/v1/timers'
 exports.getTimers = async (req, res) => {
@@ -7,12 +7,12 @@ exports.getTimers = async (req, res) => {
     res.send(timers);
 };
 
-// Public Route: GET 'api/v1/timers/:timer_id'
+// Public Route: GET 'api/v1/timers/:id'
 exports.getTimer = async (req, res) => {
-    const timer = await Timer.findById(req.params.timer_id);
+    const timer = await Timer.findById(req.params.id);
 
     if (!timer) res.status(404).send("The title with the provided ID was not found.");
-    res.send(timer);    
+    res.send(timer);
 };
 
 // Private Route: POST 'api/v1/timers'
@@ -20,7 +20,7 @@ exports.createTimer = async (req, res) => {
     const {errors} = validate(req.body);
     if (errors) return res.status(400).json(errors);
 
-    let user = await user.findById(req.body.userId);
+    let user = await User.findById(req.body.userId);
     if (!user) return res.status(400).send('Invalid user');
 
     let timer = new Timer ({
@@ -55,6 +55,8 @@ exports.updateTimer = async (req, res) => {
     const { errors } = validate(req.body);
     if (errors) return res.status(400).send(errors);
 
+    console.log('TIMER ID:', req.params.id);
+
     let timer = await Timer.findById(req.params.id);
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
@@ -82,10 +84,13 @@ exports.updateTimer = async (req, res) => {
     res.send(timer); 
 };
 
-// Private Route: DELETE 'api/v1/timers/:timer_id'
+// Private Route: DELETE 'api/v1/timers/:id'
 exports.deleteTimer = async (req, res) => {
-    const timer = Timer.findOneAndDelete({ _id: req.params.id})
-    if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
+
+
+    const timer = await Timer.findOneAndDelete({ _id: req.params.id });
+
+    if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
     res.send(timer);
 };

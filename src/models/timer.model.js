@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const timerSchema = new Schema ({
     user: {
@@ -18,13 +19,11 @@ const timerSchema = new Schema ({
     },
     isPomodoro: {
         type: Boolean,
-        required: true,
-        default: false
+        required: true
     },
     currentTime: {
         type: Number,
-        required: true,
-        default: 0
+        required: true
     },
     intervalNum: {
         type: Number,
@@ -34,22 +33,19 @@ const timerSchema = new Schema ({
         type: String,
         required: true,
         minlength: 1,
-        maxlength: 2,
-        default: "00"
+        maxlength: 2
     },
     timerMinutes: {
         type: String,
         required: true,
         minlength: 1,
-        maxlength: 2,
-        default: "00"
+        maxlength: 2
     },
     timerSeconds: {
         type: String,
         required: true,
         minlength: 1,
-        maxlength: 2,
-        default: "00"
+        maxlength: 2
     },
     breakTime: {
         type: Number,
