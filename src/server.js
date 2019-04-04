@@ -43,8 +43,8 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/v1/users', users);
-app.use("/api/v1/timers", timers);
-app.use("/api/v1/auth", auth);
+app.use('/api/v1/timers', timers);
+app.use('/api/v1/auth', auth);
 
 // Handle server-side errors
 app.use(error);
@@ -56,7 +56,7 @@ app.use(express.static('public'));
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-        console.log("CORS-enabled server is running on port " + PORT);   
+        console.log('CORS-enabled server is running on port ' + PORT);   
 });
 
 
