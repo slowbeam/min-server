@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // CORS middleware (enable all CORS requests)
-app.use(cors());
+// app.use(cors());
 
 // Logs a message to the console when a request is made
 app.use((req, res, next) => {

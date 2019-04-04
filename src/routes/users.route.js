@@ -5,7 +5,6 @@ const auth = require('../middleware/auth');
 // Public Routes
 router.post("/", userController.createUser);
 
-
 // Private Routes
 router.get("/me", auth, userController.getCurrentUser);
 router.get("/", auth, userController.getUsers);
