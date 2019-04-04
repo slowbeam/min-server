@@ -1,99 +1,33 @@
-const User = require("../models/user.model");
+const {User, validate}= require("../models/user.model");
+const _ = require('lodash');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
 
-const validateLoginInput = require("../validations/login.validation");
-const validateSignUpInput = require("../validations/signup.validation");
+// Register a new user, Public Route: POST 'api/v1/users'
+exports.createUser = async (req, res) => {
+    const {errors} = validate(req.body);
+    if (errors) return res.status(400).json(errors);
+    
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send('A user with this email already exists.');
 
-// Public Route: POST 'api/v1/users'
-exports.createUser = (req, res) => {
-    const { errors, isValid } = validateSignUpInput(req.body);
+    user = new User(_.pick(req.body, ["name", "email", "password"]));
 
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
 
-    User.findOne({ email: req.body.email }).then(user => {
-        if (user) {
-            errors.email = "Email already exists";
-            return res.status(400).json(errors);
-        } else {
-            let newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
-            });
-
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(newUser.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-                    newUser.save()
-                        .then(user => res.json(user))
-                        .catch(err => console.log(err));
-                });
-            });
-        }
-    });
+    const token = user.generateAuthToken();
+    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));   
 };
 
-// Public Route 'api/v1/users/login'
-exports.logInUser = (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
-
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
-
-    let email = req.body.email;
-    let password = req.body.password;
-
-    User.findOne({ email }).then(user => {
-        if (!user) {
-            errors.email = "User not found";
-            return res.status(404).json(errors);
-        }
-
-        bcrypt.compare(password, user.password).then(checkPassword => {
-            if (checkPassword) {
-                let payload = {
-                    id: user.id,
-                    name: user.name
-                };
-
-                jwt.sign(payload, keys.secretOrKey, (err, token) => {
-                    res.json({
-                        token: "Bearer " + token
-                    });
-                });
-            } else {
-                errors.password = "Password is incorrect";
-                return res.status(400).json(errors);
-            }
-        });
-    });
-};
-
-// Public Route: GET 'api/v1/users'
-exports.getUsers = (req, res) => {
-    let errors = {};
-    User.find()
-        .then(users => {
-            if (!users) {
-                errors.noUser = "There are no users";
-                return res.status(404).json(errors);
-            }
-            res.json(users);
-        })
-        .catch(err => res.status(404).json({ user: "There are no users"}));
+// Private Route: GET 'api/v1/users'
+exports.getUsers = async (req, res) => {
+    const users = await User.find().sort({ name: 1});
+    res.send(users);
 };
 
 // Private Route: 'api/v1/users/current'
-exports.getCurrentUser = (req, res) => {
-    res.json({
-        id: req.user.id,
-        name: req.user.name,
-        email: req.user.email
-    });
+exports.getCurrentUser = async (req, res) => {
+    const user = await User.findById(req.user._id).select('-password');
+    res.send(user);
 };

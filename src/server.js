@@ -7,9 +7,13 @@ const cors = require('cors');
 const path = require('path');
 const users = require('./routes/users.route');
 const timers = require('./routes/timers.route');
+const auth = require('./routes/auth.route');
+const config = require('config');
+
+
 
 // MongoDB connection
-const mongoDB = process.env.MONGODB_URI || require("./config/keys").mongoURI;
+const mongoDB = process.env.MONGO_URI || config.get('mongoURI');
 
 mongoose.connect(
     mongoDB,
@@ -36,6 +40,7 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api/v1/users', users);
 app.use("/api/v1/timers", timers);
+app.use("/api/v1/auth", auth);
 
 // Serves the API via the public folder's index.html
 app.use(express.static('public'));

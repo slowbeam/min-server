@@ -1,0 +1,5 @@
+{
+    "nodeENV": "NODE_ENV",
+    "jwtPrivateKey": "min_jwtPrivateKey",
+    "mongoURI": "min_mongoURI"
+}

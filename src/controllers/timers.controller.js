@@ -1,88 +1,91 @@
 const mongoose = require("mongoose");
-const Timer = require("../models/timer.model.js");
-const validateTimerInput = require("../validations/timer.validation");
+const {Timer, validate} = require("../models/timer.model.js");
 
 // Public Route: GET 'api/v1/timers'
-exports.getTimers = (req, res) => {
-    Timer.find()
-    .then(timers => res.json(timers))
-    .catch(err => 
-        res.status(404).json( { notFound: "Did not find any timers"})
-    );
+exports.getTimers = async (req, res) => {
+    const timers = await Timer.find();
+    res.send(timers);
 };
 
 // Public Route: GET 'api/v1/timers/:timer_id'
-exports.getTimer = (req, res) => {
-    Timer.findById(req.params.timer_id)
-    .then(timer => res.json(timer))
-    .catch(err => 
-        res.status(404).send({ notFound: "Did not find timer for this ID"})
-    );
+exports.getTimer = async (req, res) => {
+    const timer = await Timer.findById(req.params.timer_id);
+
+    if (!timer) res.status(404).send("The title with the provided ID was not found.");
+    res.send(timer);    
 };
 
 // Private Route: POST 'api/v1/timers'
-exports.createTimer = (req, res) => {
-    const {errors, isValid} = validateTimerInput(req.body);
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
-    let timerFields = {};
+exports.createTimer = async (req, res) => {
+    const {errors} = validate(req.body);
+    if (errors) return res.status(400).json(errors);
 
-    timerFields.user = req.body.user;
-    timerFields.currentTime = req.body.currentTime;
-    timerFields.intervalNum = req.body.intervalNum;
-    timerFields.timerHours = req.body.timerHours;
-    timerFields.timerMinutes = req.body.timerMinutes;
-    timerFields.timerSeconds = req.body.timerSeconds;
-    timerFields.isPomodoro = req.body.isPomodoro;
-    timerFields.breakTime = req.body.breakTime || 0;
-    timerFields.breakLength = req.body.breakLength || 0;
-    timerFields.breakMinutes = req.body.breakMinutes || "00";
-    timerFields.longBreakTime = req.body.longBreakTime || 0;
-    timerFields.longBreakLength = req.body.longBreakLength || 0;
-    timerFields.longBreakMinutes = req.body.longBreakMinutes || "00";
-    timerFields.isBreak= req.body.isBreak || false;
-    timerFields.isLongBreak = req.body.isLongBreak || false;
-    timerFields.pomCount = req.body.pomCount || 0;
+    let user = await user.findById(req.body.userId);
+    if (!user) return res.status(400).send('Invalid user');
 
-    new Timer(timerFields).save().then(timer => res.json(timer));
+    let timer = new Timer ({
+        user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        },
+        currentTime: req.body.currentTime,
+        intervalNum: req.body.intervalNum,
+        timerHours: req.body.timerHours,
+        timerMinutes: req.body.timerMinutes,
+        timerSeconds: req.body.timerSeconds,
+        isPomodoro: req.body.isPomodoro,
+        breakTime: req.body.breakTime,
+        breakLength: req.body.breakLength,
+        breakMinutes: req.body.breakMinutes,
+        longBreakTime: req.body.longBreakTime,
+        longBreakLength: req.body.longBreakLength,
+        longBreakMinutes: req.body.longBreakMinutes,
+        isBreak: req.body.isBreak,
+        isLongBreak: req.body.isLongBreak,
+        pomCount: req.body.pomCount
+    })
+
+    timer = await timer.save();
+    res.send(timer);
 };
 
-// Private Route: PUT 'api/v1/timers/:timer_id'
-exports.updateTimer = (req, res) => {
-    Timer.findById(req.params.timer_id).then(timer => {
-        let timerFields = {};
+// Private Route: PUT 'api/v1/timers/:id'
+exports.updateTimer = async (req, res) => {
+    const { errors } = validate(req.body);
+    if (errors) return res.status(400).send(errors);
 
-        if (req.body.user){
-            timerFields.user = req.body.user;
-        }
-        if (req.body.currentTime) {
-            timerFields.currentTime = req.body.currentTime; 
-        }
-        if (req.body.intervalNum) {
-            timerFields.intervalNum = req.body.intervalNum; 
-        }
-        if (req.body.timerHours) {
-            timerFields.timerHours = req.body.timerHours; 
-        }
-        if (req.body.timerMinutes) {
-            timerFields.timerMinutes = req.body.timerMinutes; 
-        }
-        if (req.body.timerSeconds) {
-            timerFields.timerSeconds = req.body.timerSeconds; 
-        }
+    let timer = await Timer.findById(req.params.id);
+    if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
-        Timer.findByIdAndUpdate(
-            req.params.timer_id,
-            { $set: timerFields },
-            { new: true }
-        ).then(timer => res.json(timer));
-    });
+    const timerFields = {};
+
+    timerFields.currentTime = req.body.currentTime || timer.currentTime;
+    timerFields.timerHours = req.body.timerHours || timer.timerHours;
+    timerFields.timerMinutes = req.body.timerMinutes || timer.timerMinutes;
+    timerFields.timerSeconds = req.body.timerSeconds || timer.timerSeconds;
+    timerFields.breakTime = req.body.breakTime || timer.breakTime;
+    timerFields.breakMinutes = req.body.breakMinutes || timer.breakMinutes;
+    timerFields.breakTime = req.body.breakTime || timer.breakTime;
+    timerFields.breakLength = req.body.breakLength || timer.breakLength;
+    timerFields.longBreakMinutes = req.body.longBreakMinutes || timer.longBreakMinutes;
+    timerFields.longBreakTime = req.body.longBreakTime || timer.longBreakTime;
+    timerFields.longBreakLength = req.body.longBreakLength || timer.longBreakLength;
+    timerFields.isBreak = req.body.isBreak || timer.isBreak;
+    timerFields.isLongBreak = req.body.isLongBreak || timer.isLongBreak;
+    timerFields.pomCount = req.body.pomCount || timer.pomCount;
+
+    timer = await Timer.findByIdAndUpdate( req.params.id,
+        { $set: timerFields },
+        { new: true }
+    );
+    res.send(timer); 
 };
 
 // Private Route: DELETE 'api/v1/timers/:timer_id'
-exports.deleteTimer = (req, res) => {
-    Timer.findOneAndDelete({ _id: req.params.timer_id})
-    .then(timer => res.json(timer))
-    .catch(err => res.status(404).json({ notFound: "Did not find timer for this ID"}));
+exports.deleteTimer = async (req, res) => {
+    const timer = Timer.findOneAndDelete({ _id: req.params.id})
+    if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
+
+    res.send(timer);
 };

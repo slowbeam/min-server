@@ -1,36 +1,30 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Joi = require('joi');
 
-//     pomLength: 0,
-//     currentTime: 0,
-//     breakLength: 0,
-//     breakTime: 0,
-//     longBreakLength: 0,
-//     longBreakTime: 0,
-//     longBreakMinutes: "00",
-//     intervalNum: null,
-//     timerRunning: false,
-//     timerHours: "00",
-//     timerMinutes: "00",
-//     timerSeconds: "00",
-//     isPomodoro: false,
-//     breakMinutes: "00",
-//     isBreak: false,
-//     isLongBreak: false,
-//     pomCount: 0
-
-const TimerSchema = new Schema ({
+const timerSchema = new Schema ({
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
+        type: new Schema ({
+            name: {
+                type: String,
+                required: true
+            },
+            email: {
+                type: String,
+                required: true
+            }
+        }),
+        required: true
     },
     isPomodoro: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     },
     currentTime: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     },
     intervalNum: {
         type: Number,
@@ -38,26 +32,92 @@ const TimerSchema = new Schema ({
     },
     timerHours: {
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
+        maxlength: 2,
+        default: "00"
     },
     timerMinutes: {
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
+        maxlength: 2,
+        default: "00"
     },
     timerSeconds: {
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
+        maxlength: 2,
+        default: "00"
     },
-    breakTime: Number,
-    breakLength: Number,
-    breakMinutes: String,
-    longBreakTime: Number,
-    longBreakLength: Number,
-    longBreakMinutes: String,
-    isBreak: Boolean,
-    isLongBreak: Boolean,
-    pomCount: Number
-
+    breakTime: {
+        type: Number,
+        default: 0
+    },
+    breakLength: {
+        type: Number,
+        default: 0
+    },
+    breakMinutes: {
+        type: String,
+        minlength: 1,
+        maxlength: 2,
+        default: "00"
+    },
+    longBreakTime: {
+        type: Number,
+        default: 0
+    },
+    longBreakLength: {
+        type: Number,
+        default: 0
+    },
+    longBreakMinutes: {
+        type: String,
+        minlength: 1,
+        maxlength: 2,
+        default: "00"
+    },
+    isBreak: {
+        type: Boolean,
+        default: false
+    },
+    isLongBreak: {
+        type: Boolean,
+        default: false
+    },
+    pomCount: {
+        type: Boolean,
+        default: false
+    }
 });
 
-module.exports = mongoose.model("Timer", TimerSchema);
+const Timer = mongoose.model("Timer", timerSchema);
+
+function validateTimer(timer) {
+    const schema = {
+        userId: Joi.objectId().required(),
+        isPomodoro: Joi.boolean().required(),
+        currentTime: Joi.number().required(),
+        intervalNum: Joi.number().required(),
+        timerHours: Joi.string().min(1).max(2).required(),
+        timerMinutes: Joi.string().min(1).max(2).required(),
+        timerSeconds: Joi.string().min(1).max(2).required(),
+        breakTime: Joi.number(),
+        breakLength: Joi.number(),
+        breakMinutes: Joi.string().min(1).max(2),
+        longBreakTime: Joi.number(),
+        longBreakLength: Joi.number(),
+        longBreakMinutes: Joi.string().min(1).max(2),
+        isBreak: Joi.boolean(),
+        isLongBreak: Joi.boolean(),
+        pomCount: Joi.number()
+    };
+
+    return Joi.validate(timer, schema);
+}
+
+exports.Timer = Timer;
+exports.validate = validateTimer;
+
