@@ -86,11 +86,7 @@ exports.updateTimer = async (req, res) => {
 
 // Private Route: DELETE 'api/v1/timers/:id'
 exports.deleteTimer = async (req, res) => {
-
-
-
     const timer = await Timer.findOneAndDelete({ _id: req.params.id });
-
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
     res.send(timer);
 };
