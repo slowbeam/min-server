@@ -15,6 +15,11 @@ const config = require('config');
 // MongoDB connection
 const mongoDB = process.env.MONGO_URI || config.get('mongoURI');
 
+if (!config.get('jwtPrivateKey')) {
+    console.error('FATAL ERROR: jwtPrivateKey is not defined');
+    process.exit(1);
+}
+
 mongoose.connect(
     mongoDB,
     { 
