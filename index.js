@@ -5,7 +5,7 @@ const winston = require('winston');
 require('dotenv').config();
 require('winston-mongodb');
 
-// Load modules
+// Load startup modules
 require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();

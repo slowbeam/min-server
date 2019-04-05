@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "start-watch": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "winston-mongodb": "^5.0.0"
   },
   "devDependencies": {
+    "jest": "^24.7.1",
     "nodemon": "^1.18.10"
   }
 }
