@@ -1,18 +1,17 @@
-require('dotenv').config();
-require('express-async-errors');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const users = require('./routes/users.route');
-const timers = require('./routes/timers.route');
-const auth = require('./routes/auth.route');
 const config = require('config');
-const error = require('./middleware/error');
 const winston = require('winston');
+require('dotenv').config();
+require('express-async-errors');
 require('winston-mongodb');
 
+
+
+// Load routes
+require('./startup/routes')(app);
 
 // MongoDB connection
 const mongoDB = process.env.MONGO_URI || config.get('mongoURI');
@@ -44,10 +43,6 @@ mongoose.connect(
     }
 );
 
-// Body parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
 // CORS middleware (enable all CORS requests)
 // app.use(cors());
 
@@ -56,14 +51,6 @@ app.use((req, res, next) => {
     console.log(`${new Date().toString()} => ${req.originalUrl}`, req.body);
     next();
 });
-
-// Routes
-app.use('/api/v1/users', users);
-app.use('/api/v1/timers', timers);
-app.use('/api/v1/auth', auth);
-
-// Handle server-side errors
-app.use(error);
 
 // Serves the API via the public folder's index.html
 app.use(express.static('public'));
