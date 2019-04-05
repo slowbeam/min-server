@@ -1,0 +1,23 @@
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const winston = require('winston');
+require('dotenv').config();
+require('winston-mongodb');
+
+// Load modules
+require('./startup/logging')();
+require('./startup/routes')(app);
+require('./startup/db')();
+require('./startup/config')();
+require('./startup/validation')();
+
+// CORS middleware (enable all CORS requests)
+// app.use(cors());
+
+// Server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => winston.info(`CORS-enabled server is running on port ${PORT}...`));
+
+
+

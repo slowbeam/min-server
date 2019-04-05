@@ -1,2 +1,30 @@
 {"message":"could not get the timers!","stack":"Error: could not get the timers!\n    at exports.getTimers (/Users/esandy/Desktop/projects/mins/server/src/controllers/timers.controller.js:6:11)\n    at newFn (/Users/esandy/Desktop/projects/mins/server/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/route.js:112:3)\n    at newFn (/Users/esandy/Desktop/projects/mins/server/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:281:22\n    at Function.process_params (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:335:12)\n    at next (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:275:10)\n    at Function.handle (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:174:3)\n    at router (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:47:12)\n    at newFn (/Users/esandy/Desktop/projects/mins/server/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:317:13)\n    at /Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/router/index.js:284:7","level":"error","timestamp":"2019-04-05T14:55:50.025Z"}
 {"message":"Cannot set headers after they are sent to the client","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at ServerResponse.setHeader (_http_outgoing.js:482:11)\n    at ServerResponse.header (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/response.js:767:10)\n    at ServerResponse.send (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/response.js:170:12)\n    at exports.getTimer (/Users/esandy/Desktop/projects/mins/server/src/controllers/timers.controller.js:15:9)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)","level":"error","timestamp":"2019-04-05T15:24:35.424Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2019-04-05T17:15:08.963Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:15:25.957Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:15:36.638Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:15:48.289Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:16:15.550Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:16:49.990Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:17:16.294Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:17:29.211Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:17:44.769Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:18:59.412Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:19:33.138Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:19:54.271Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:20:32.619Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:20:48.815Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:20:55.234Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:21:33.329Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:21:46.817Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:22:12.979Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:23:12.470Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:24:12.694Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:24:27.397Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:27:45.867Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-05T17:28:41.501Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:28:41.641Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-05T17:31:40.239Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:31:40.487Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-05T17:33:16.404Z"}
+{"level":"info","message":"Connected to MongoDB...","timestamp":"2019-04-05T17:33:16.558Z"}
