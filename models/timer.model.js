@@ -83,8 +83,8 @@ const timerSchema = new Schema ({
         default: false
     },
     pomCount: {
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
     }
 });
 
