@@ -3,7 +3,6 @@ const { User } = require("../models/user.model.js");
 
 // Public Route: GET 'api/v1/timers'
 exports.getTimers = async (req, res) => {
-    throw new Error('could not get the timers!');
     const timers = await Timer.find();
     res.send(timers);
 };

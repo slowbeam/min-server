@@ -10,15 +10,31 @@ const timers = require('./routes/timers.route');
 const auth = require('./routes/auth.route');
 const config = require('config');
 const error = require('./middleware/error');
+const winston = require('winston');
+require('winston-mongodb');
+
 
 // MongoDB connection
 const mongoDB = process.env.MONGO_URI || config.get('mongoURI');
 
+// Handle uncaught exceptions
+winston.handleExceptions(new winston.transports.File({ filename: 'uncaughtExceptions.log' }))
+
+// Handle uncaught promise rejections
+process.on('unhandledRejection', (ex) => {
+    throw ex;
+});
+
+// Log server errors to logfile.log
+winston.add(winston.transports.File, { filename: 'logfile.log'});
+
+// Handle missing jwtPrivateKey
 if (!config.get('jwtPrivateKey')) {
     console.error('FATAL ERROR: jwtPrivateKey is not defined');
     process.exit(1);
 }
 
+// Connect to mongoDB
 mongoose.connect(
     mongoDB,
     { 
