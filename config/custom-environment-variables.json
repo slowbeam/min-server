@@ -1,5 +1,4 @@
 {
-    "nodeENV": "NODE_ENV",
     "jwtPrivateKey": "min_jwtPrivateKey",
     "db": "min_db"
 }
