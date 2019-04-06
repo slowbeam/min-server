@@ -13,7 +13,7 @@ require('./startup/validation')();
 require('./startup/prod')(app);
 
 // CORS middleware (enable all CORS requests)
-// app.use(cors());
+app.use(cors());
 
 // Server
 const PORT = process.env.PORT || 3001;
