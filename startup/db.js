@@ -3,7 +3,7 @@ const winston = require('winston');
 const config = require('config');
 
 // MongoDB connection
-const mongoDB = process.env.MONGO_URI || config.get('mongoURI');
+const mongoDB = process.env.min_db || config.get('db');
 
 module.exports = function () {
     // Connect to mongoDB

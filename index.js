@@ -3,7 +3,6 @@ const app = express();
 const cors = require('cors');
 const winston = require('winston');
 require('dotenv').config();
-require('winston-mongodb');
 
 // Load startup modules
 require('./startup/logging')();
