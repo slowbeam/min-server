@@ -16,7 +16,11 @@ exports.logIn = async (req, res) => {
 
     const token = user.generateAuthToken();
     const resObj = {
-        token: token
+        token: token,
+        user: {
+            name: user.name,
+            email: user.email
+        }
     };
     res.send(resObj);
 };
