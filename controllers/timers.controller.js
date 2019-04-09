@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const {Timer, validate} = require("../models/timer.model.js");
 const { User } = require("../models/user.model.js");
 
@@ -10,15 +11,15 @@ exports.getTimers = async (req, res) => {
 // Public Route: GET 'api/v1/timers/:id'
 exports.getTimer = async (req, res) => {
     const timer = await Timer.findById(req.params.id);
-    
-    if (!timer) res.status(404).send("The title with the provided ID was not found.");
+
+    if (!timer) res.status(404).send("The timer with the provided ID was not found.");
     res.send(timer);  
 };
 
 // Private Route: POST 'api/v1/timers'
 exports.createTimer = async (req, res) => {
-    const {errors} = validate(req.body);
-    if (errors) return res.status(400).json(errors);
+    const {error} = validate(req.body);
+    if (error) return res.status(400).json(error);
 
     let user = await User.findById(req.body.userId);
     if (!user) return res.status(400).send('Invalid user');
@@ -52,10 +53,8 @@ exports.createTimer = async (req, res) => {
 
 // Private Route: PUT 'api/v1/timers/:id'
 exports.updateTimer = async (req, res) => {
-    const { errors } = validate(req.body);
-    if (errors) return res.status(400).send(errors);
-
-    console.log('TIMER ID:', req.params.id);
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error);
 
     let timer = await Timer.findById(req.params.id);
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');

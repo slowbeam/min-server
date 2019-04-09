@@ -2,17 +2,15 @@ const mongoose = require('mongoose');
 const winston = require('winston');
 const config = require('config');
 
-// MongoDB connection
-const mongoDB = process.env.min_db || config.get('db');
-
+// Connect to mongoDB
 module.exports = function () {
-    // Connect to mongoDB
+    const db = config.get('db');
     mongoose.connect(
-        mongoDB,
+        db,
         { 
             useNewUrlParser: true,
             useFindAndModify: false,
             useCreateIndex: true
         }
-    ).then(() => winston.info('Connected to MongoDB...'));
+    ).then(() => winston.info(`Connected to ${db}...`));
 };

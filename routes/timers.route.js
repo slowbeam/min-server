@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const timerController = require("../controllers/timers.controller");
 const auth = require('../middleware/auth');
-
+const validateObjectId = require('../middleware/validateObjectId');
 
 // Public Routes
 router.get("/", timerController.getTimers);
-router.get("/:id", timerController.getTimer);
+router.get("/:id", validateObjectId, timerController.getTimer);
 
 // Private Routes
 router.post("/", auth, timerController.createTimer);

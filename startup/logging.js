@@ -14,4 +14,4 @@ module.exports = function() {
 
     // Log server errors to logfile.log
     winston.add(winston.transports.File, { filename: 'logfile.log'});
-}
+};

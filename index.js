@@ -9,7 +9,7 @@ app.use(cors());
 app.options('*', cors());
 
 // Load startup modules
-require('./startup/logging')();
+// require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();
 require('./startup/config')();
@@ -18,7 +18,6 @@ require('./startup/prod')(app);
 
 // Server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => winston.info(`CORS-enabled server is running on port ${PORT}...`));
+const server = app.listen(PORT, () => winston.info(`CORS-enabled server is running on port ${PORT}...`));
 
-
-
+module.exports = server;

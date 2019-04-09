@@ -5,8 +5,8 @@ const {User}= require('../models/user.model');
 
 // Login a user, Public Route 'api/v1/auth'
 exports.logIn = async (req, res) => {
-    const {errors} = validate(req.body);
-    if (errors) return res.status(400).json(errors);
+    const {error} = validate(req.body);
+    if (error) return res.status(400).json(error);
     
     let user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send('Invalid email or password');
