@@ -1,5 +1,4 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
 const {Timer} = require('../../models/timer.model');
 const {User} = require('../../models/user.model');
 let server;
@@ -8,14 +7,14 @@ describe('/api/v1/timers', () => {
     
     beforeEach(() => { server = require('../../index'); });
     
-    afterEach(async () => { 
+    afterEach( async() => { 
         server.close(); 
         await Timer.remove({});
         await User.remove({});
     });
 
     describe('GET /', () => {
-        it ('should return all timers', async () => {
+        it('should return all timers', async () => {
             const user1 = new User({
                 name: "testUser One",
                 email: "1@gmail.com",
@@ -55,7 +54,7 @@ describe('/api/v1/timers', () => {
     });
 
     describe('GET /:id', () => {
-        it ('should return a timer if valid id is passed', async () => {
+        it('should return a timer if valid id is passed', async () => {
             const user = new User({
                 name: "test test",
                 email: "test@gmail.com",
@@ -77,7 +76,7 @@ describe('/api/v1/timers', () => {
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('intervalNum', timer.intervalNum);
         });
-        it ('should return 404 if invalid id is passed', async () => {
+        it('should return 404 if invalid id is passed', async () => {
             const res = await request(server).get('/api/v1/timers/111111111111111111111111');
             expect(res.status).toBe(404);
         });
@@ -123,37 +122,37 @@ describe('/api/v1/timers', () => {
             timerHours = "10";
         });
 
-        it ('should return 401 if client is not logged in', async () => {
+        it('should return 401 if client is not logged in', async () => {
             token = '';
             const res = await exec(); 
             expect(res.status).toBe(401);
         });
-        it ('should return 400 if isPomodoro is not a boolean', async () => {
+        it('should return 400 if isPomodoro is not a boolean', async () => {
             isPomodoro = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if currentTime is not a number', async () => {
+        it('should return 400 if currentTime is not a number', async () => {
             currentTime = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if intervalNum is not a number', async () => {
+        it('should return 400 if intervalNum is not a number', async () => {
             intervalNum = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if timerHours is longer than 2 characters', async () => {
+        it('should return 400 if timerHours is longer than 2 characters', async () => {
             timerHours = "000";
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should save the timer if it is valid', async () => {
+        it('should save the timer if it is valid', async () => {
             await exec();
             const timer = await Timer.find({ intervalNum: 11111});
             expect(timer[0]).not.toBeNull();
         });
-        it ('should return the timer if it is valid', async () => {
+        it('should return the timer if it is valid', async () => {
             const res = await exec();
             expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('isPomodoro', false);
@@ -212,10 +211,10 @@ describe('/api/v1/timers', () => {
                 timerSeconds: '10'
             });
 
-            await timer.save();
+            timer = await timer.save();
             token = user.generateAuthToken();
             id = timer._id;
-            newPomodoro = false;
+            newPomodoro = true;
             newCurrentTime = 20;
             newIntervalNum = 22222;
             newTimerHours = "20";
@@ -223,40 +222,62 @@ describe('/api/v1/timers', () => {
             newTimerSeconds = "20";
         });
 
-        it ('should return 401 if client is not logged in', async () => {
+        it('should return 401 if client is not logged in', async () => {
             token = '';
             const res = await exec(); 
             expect(res.status).toBe(401);
         });
-        it ('should return 400 if isPomodoro is not a boolean', async () => {
+        it('should return 400 if isPomodoro is not a boolean', async () => {
             newPomodoro = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if currentTime is not a number', async () => {
+        it('should return 400 if currentTime is not a number', async () => {
             newCurrentTime = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if intervalNum is not a number', async () => {
+        it('should return 400 if intervalNum is not a number', async () => {
             newIntervalNum = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should return 400 if timerHours is longer than 2 characters', async () => {
+        it('should return 400 if timerHours is longer than 2 characters', async () => {
             newTimerHours = "000";
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it ('should save the timer if it is valid', async () => {
+        it('should save the timer if it is valid', async () => {
             await exec();
             const timer = await Timer.find({ intervalNum: 11111});
             expect(timer[0]).not.toBeNull();
         });
-        it ('should return 404 if id is invalid', async () => {
+        it('should return 404 if id is invalid', async () => {
             id = 1;
             const res = await exec();
             expect(res.status).toBe(404);
+        });
+        it('should update the timer if input is valid', async () => {
+            await exec();
+
+            const updatedTimer = await Timer.findById(id);
+            expect(updatedTimer.isPomodoro).toBe(true);
+            expect(updatedTimer.currentTime).toBe(20);
+            expect(updatedTimer.intervalNum).toBe(22222);
+            expect(updatedTimer.timerHours).toBe("20");
+            expect(updatedTimer.timerMinutes).toBe("20");
+            expect(updatedTimer.timerSeconds).toBe("20");
+        });
+        it('should return the updated timer if input is valid', async () => {
+            const res = await exec();
+
+            expect(res.body).toHaveProperty('_id');
+            expect(res.body).toHaveProperty('isPomodoro');
+            expect(res.body).toHaveProperty('currentTime');
+            expect(res.body).toHaveProperty('intervalNum');
+            expect(res.body).toHaveProperty("timerHours");
+            expect(res.body).toHaveProperty("timerMinutes");
+            expect(res.body).toHaveProperty("timerSeconds");
         });
     });
 });

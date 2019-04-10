@@ -1424,3 +1424,77 @@
 {"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:07:30.589Z"}
 {"level":"error","timestamp":"2019-04-10T19:07:30.609Z"}
 {"level":"error","timestamp":"2019-04-10T19:07:30.626Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:15:04.843Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:15:04.878Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:15:05.430Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:15:05.452Z"}
+{"level":"error","timestamp":"2019-04-10T19:15:05.513Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:19:01.413Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:19:02.052Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:19:36.812Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:19:36.857Z"}
+{"level":"error","timestamp":"2019-04-10T19:19:36.943Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:19:36.943Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:19:36.968Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:21:48.669Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:21:48.696Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:21:49.247Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:21:49.268Z"}
+{"level":"error","timestamp":"2019-04-10T19:21:49.330Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:23:10.469Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:23:10.513Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:23:11.167Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:23:11.190Z"}
+{"level":"error","timestamp":"2019-04-10T19:23:11.251Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:24:07.379Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:24:07.422Z"}
+{"level":"error","timestamp":"2019-04-10T19:24:07.488Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:24:07.507Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:24:07.608Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:24:35.885Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:24:35.926Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:24:36.006Z"}
+{"level":"error","timestamp":"2019-04-10T19:24:36.016Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:24:36.051Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:25:30.869Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:25:30.891Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:25:31.427Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:25:31.450Z"}
+{"level":"error","timestamp":"2019-04-10T19:25:31.509Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:26:24.163Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:26:24.189Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:26:25.034Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:26:25.058Z"}
+{"level":"error","timestamp":"2019-04-10T19:26:25.119Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:04.360Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:04.385Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:04.931Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:04.961Z"}
+{"level":"error","timestamp":"2019-04-10T19:27:05.029Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:17.413Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:17.445Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:17.969Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:18.002Z"}
+{"level":"error","timestamp":"2019-04-10T19:27:18.075Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:30.603Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:30.630Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:31.400Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:31.431Z"}
+{"level":"error","timestamp":"2019-04-10T19:27:31.496Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:41.182Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:41.210Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:27:41.857Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:27:41.879Z"}
+{"level":"error","timestamp":"2019-04-10T19:27:41.942Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:30:23.563Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:30:23.590Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:30:24.399Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:30:24.424Z"}
+{"level":"error","timestamp":"2019-04-10T19:30:24.488Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:30:56.269Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:30:56.290Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:31:23.449Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:31:23.477Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-10T19:31:23.940Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min_tests...","timestamp":"2019-04-10T19:31:23.961Z"}
+{"level":"error","timestamp":"2019-04-10T19:31:24.060Z"}

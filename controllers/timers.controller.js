@@ -61,7 +61,9 @@ exports.updateTimer = async (req, res) => {
 
     const timerFields = {};
 
+    timerFields.isPomodoro = req.body.isPomodoro || timer.isPomodoro;
     timerFields.currentTime = req.body.currentTime || timer.currentTime;
+    timerFields.intervalNum = req.body.intervalNum || timer.intervalNum;
     timerFields.timerHours = req.body.timerHours || timer.timerHours;
     timerFields.timerMinutes = req.body.timerMinutes || timer.timerMinutes;
     timerFields.timerSeconds = req.body.timerSeconds || timer.timerSeconds;
