@@ -77,158 +77,87 @@ describe('/api/v1/timers', () => {
             expect(res.status).toBe(200);
             expect(res.body).toHaveProperty('intervalNum', timer.intervalNum);
         });
-        // it ('should return 404 if invalid id is passed', async () => {
-        //     const res = await request(server).get('/api/v1/timers/111111111111111111111111');
-        //     expect(res.status).toBe(404);
-        // });
+        it ('should return 404 if invalid id is passed', async () => {
+            const res = await request(server).get('/api/v1/timers/111111111111111111111111');
+            expect(res.status).toBe(404);
+        });
     });
 
     describe('POST /', () => {
-        it ('should return 401 if client is not logged in', async () => {
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .send({ 
-                    userId: '1', 
-                    isPomodoro: false, 
-                    currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: '10',
-                    timerMinutes: '10',
-                    timerSeconds: '10'
-            });   
-            expect(res.status).toBe(401);
-        });
-        it ('should return 400 if isPomodoro is not a boolean', async () => {
+
+        // Define the happy path, and then in each test we change one parameter than clearly aligns with the name of the test
+
+        let token;
+        let isPomodoro;
+        let currentTime;
+        let intervalNum;
+        let timerHours;
+
+
+        const exec = async () => {
             const user = new User({
                 name: "name name",
                 email: "name@gmail.com",
                 password: "123456"
             });
+
             await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .set('x-auth-token', token)
-                .send({
-                    userId: user._id,
-                    isPomodoro: 'a',
-                    currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: "00",
-                    timerMinutes: "00",
-                    timerSeconds: "00"
-            });
-            expect(res.status).toBe(400);
-        });
-        it ('should return 400 if currentTime is not a number', async () => {
-            const user = new User({
-                name: "name name",
-                email: "name@gmail.com",
-                password: "123456"
-            });
-            await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .set('x-auth-token', token)
-                .send({ 
-                    userId: user._id,
-                    isPomodoro: false,
-                    currentTime: 'a',
-                    intervalNum: 11111,
-                    timerHours: "00",
-                    timerMinutes: "00",
-                    timerSeconds: "00"
-            });
-            expect(res.status).toBe(400);
-        });
-        it ('should return 400 if intervalNum is not a number', async () => {
-            const user = new User({
-                name: "name name",
-                email: "name@gmail.com",
-                password: "123456"
-            });
-            await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .set('x-auth-token', token)
-                .send({ 
-                    userId: user._id,
-                    isPomodoro: false,
-                    currentTime: 10,
-                    intervalNum: 'a',
-                    timerHours: "00",
-                    timerMinutes: "00",
-                    timerSeconds: "00"
-            });
-            expect(res.status).toBe(400);
-        });
-        it ('should return 400 if timerHours is longer than 2 characters', async () => {
-            const user = new User({
-                name: "name name",
-                email: "name@gmail.com",
-                password: "123456"
-            });
-            await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .set('x-auth-token', token)
-                .send({ 
-                    userId: user._id,
-                    isPomodoro: false,
-                    currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: "000",
-                    timerMinutes: "00",
-                    timerSeconds: "00"
-            });
-            expect(res.status).toBe(400);
-        });
-        it ('should save the timer if it is valid', async () => {
-            const user = new User({
-                name: "name name",
-                email: "name@gmail.com",
-                password: "123456"
-            });
-            await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
+
+            return await request(server)
                 .post('/api/v1/timers')
                 .set('x-auth-token', token)
                 .send({ 
                     userId: user._id, 
-                    isPomodoro: false, 
-                    currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: '10',
+                    isPomodoro: isPomodoro, 
+                    currentTime: currentTime,
+                    intervalNum: intervalNum,
+                    timerHours: timerHours,
                     timerMinutes: '10',
                     timerSeconds: '10'
             });
+        }
+
+        beforeEach(() => {
+            token = new User().generateAuthToken(); 
+            isPomodoro = false;
+            currentTime = 10;
+            intervalNum = 11111;
+            timerHours = "10";
+        });
+
+        it ('should return 401 if client is not logged in', async () => {
+            token = '';
+            const res = await exec(); 
+            expect(res.status).toBe(401);
+        });
+        it ('should return 400 if isPomodoro is not a boolean', async () => {
+            isPomodoro = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if currentTime is not a number', async () => {
+            currentTime = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if intervalNum is not a number', async () => {
+            intervalNum = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if timerHours is longer than 2 characters', async () => {
+            timerHours = "000";
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should save the timer if it is valid', async () => {
+            await exec();
             const timer = await Timer.find({ intervalNum: 11111});
             expect(timer[0]).not.toBeNull();
         });
         it ('should return the timer if it is valid', async () => {
-            const user = new User({
-                name: "name name",
-                email: "name@gmail.com",
-                password: "123456"
-            });
-            await user.save();
-            const token = user.generateAuthToken(); 
-            const res = await request(server)
-                .post('/api/v1/timers')
-                .set('x-auth-token', token)
-                .send({ 
-                    userId: user._id, 
-                    isPomodoro: false, 
-                    currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: '10',
-                    timerMinutes: '10',
-                    timerSeconds: '10'
-            });
+
+            const res = await exec();
             expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('isPomodoro', false);
             expect(res.body).toHaveProperty('currentTime', 10);
