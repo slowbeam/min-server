@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 function validateTimer(timer) {
     const schema = { 
-        userId: Joi.objectId().required(), 
+        userId: Joi.objectId(), 
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
         intervalNum: Joi.number().required(),
@@ -21,7 +21,7 @@ function validateTimer(timer) {
         pomCount: Joi.number()
     };
 
-    return Joi.validate(timer, schema);  
+    return Joi.validate(timer, schema);
 }
 
 const timerSchema = new mongoose.Schema ({

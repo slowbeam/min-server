@@ -5,8 +5,8 @@ const jwt = require("jsonwebtoken");
 
 // Register a new user, Public Route: POST 'api/v1/users'
 exports.createUser = async (req, res) => {
-    const {error} = validate(req.body);
-    if (error) return res.status(400).json(error);
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
     
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('A user with this email already exists.');

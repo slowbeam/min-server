@@ -1,4 +1,5 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const {Timer} = require('../../models/timer.model');
 const {User} = require('../../models/user.model');
 let server;
@@ -162,5 +163,115 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('timerMinutes', '10');
             expect(res.body).toHaveProperty('timerSeconds', '10');
         });
+    });
+
+    describe('PUT /:id', () => {
+
+        // Define the happy path, and before each test, change one parameter that clearly aligns with the test
+        let token;
+        let timer;
+        let user;
+        let id;
+        let newPomodoro;
+        let newCurrentTime;
+        let newIntervalNum;
+        let newTimerHours;
+        let newTimerMinutes;
+        let newTimerSeconds;
+
+        const exec = async () => {
+            return await request(server)
+                .put('/api/v1/timers/' + id)
+                .set('x-auth-token', token)
+                .send({
+                    isPomodoro: newPomodoro,
+                    currentTime: newCurrentTime,
+                    intervalNum: newIntervalNum,
+                    timerHours: newTimerHours,
+                    timerMinutes: newTimerMinutes,
+                    timerSeconds: newTimerSeconds
+                });
+        }
+
+        beforeEach( async() => {
+            user = new User({
+                name: "name name",
+                email: "name@gmail.com",
+                password: "123456"
+            });
+
+            await user.save();
+
+            timer = new Timer({
+                user: user, 
+                isPomodoro: false,
+                currentTime: 10,
+                intervalNum: 11111,
+                timerHours: "10",
+                timerMinutes: '10',
+                timerSeconds: '10'
+            });
+
+            await timer.save();
+            token = user.generateAuthToken();
+            id = timer._id;
+            newPomodoro = false;
+            newCurrentTime = 20;
+            newIntervalNum = 22222;
+            newTimerHours = "20";
+            newTimerMinutes = "20";
+            newTimerSeconds = "20";
+        });
+
+        it ('should return 401 if client is not logged in', async () => {
+            token = '';
+            const res = await exec(); 
+            expect(res.status).toBe(401);
+        });
+        it ('should return 400 if isPomodoro is not a boolean', async () => {
+            newPomodoro = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if currentTime is not a number', async () => {
+            newCurrentTime = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if intervalNum is not a number', async () => {
+            newIntervalNum = 'a';
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should return 400 if timerHours is longer than 2 characters', async () => {
+            newTimerHours = "000";
+            const res = await exec();
+            expect(res.status).toBe(400);
+        });
+        it ('should save the timer if it is valid', async () => {
+            await exec();
+            const timer = await Timer.find({ intervalNum: 11111});
+            expect(timer[0]).not.toBeNull();
+        });
+        it ('should return 404 if id is invalid', async () => {
+            id = 1;
+            const res = await exec();
+            expect(res.status).toBe(404);
+        });
+        // it ('should update the timer if it is valid', async () => {
+        //     const res = await exec();
+        //     const updatedTimer = await Timer.findById(timer._id);
+        //     expect(updatedTimer.intervalNum).toBe(22222);
+        // });
+        // it ('should return the timer if it is valid', async () => {
+        //     const res = await exec();
+        //     expect(res.body).toHaveProperty('_id');
+        //     expect(res.body).toHaveProperty('isPomodoro', false);
+        //     expect(res.body).toHaveProperty('currentTime', 10);
+        //     expect(res.body).toHaveProperty('intervalNum', 11111);
+        //     expect(res.body).toHaveProperty('timerHours', '10');
+        //     expect(res.body).toHaveProperty('timerMinutes', '10');
+        //     expect(res.body).toHaveProperty('timerSeconds', '10');
+        // });
     });
 });

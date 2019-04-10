@@ -9,7 +9,7 @@ router.get("/:id", validateObjectId, timerController.getTimer);
 
 // Private Routes
 router.post("/", auth, timerController.createTimer);
-router.put("/:id", auth, timerController.updateTimer);
+router.put("/:id", [auth, validateObjectId], timerController.updateTimer);
 router.delete("/:id", auth, timerController.deleteTimer);
 
 module.exports = router;
