@@ -55,5 +55,4 @@ describe('auth middleware', () => {
         const res = await exec();
         expect(res.status).toBe(200);
     });
-
 });
