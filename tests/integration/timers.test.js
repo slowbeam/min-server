@@ -1,5 +1,4 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
 const {Timer} = require('../../models/timer.model');
 const {User} = require('../../models/user.model');
 let server;
@@ -85,14 +84,12 @@ describe('/api/v1/timers', () => {
 
     describe('POST /', () => {
 
-        // Define the happy path, and then in each test we change one parameter than clearly aligns with the name of the test
-
+        // Define the happy path, and before each test, change one parameter that clearly aligns with the test
         let token;
         let isPomodoro;
         let currentTime;
         let intervalNum;
         let timerHours;
-
 
         const exec = async () => {
             const user = new User({
@@ -156,7 +153,6 @@ describe('/api/v1/timers', () => {
             expect(timer[0]).not.toBeNull();
         });
         it ('should return the timer if it is valid', async () => {
-
             const res = await exec();
             expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('isPomodoro', false);
@@ -167,6 +163,4 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('timerSeconds', '10');
         });
     });
-
-
 });
