@@ -1,4 +1,4 @@
 {
     "jwtPrivateKey": "",
-    "db": "mongodb+srv://slowbeam:C0d3lyf3@cluster0-evb99.mongodb.net/prod?retryWrites=true"
+    "db": "mongodb://localhost/min"
 }

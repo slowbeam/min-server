@@ -9,7 +9,7 @@ app.use(cors());
 app.options('*', cors());
 
 // Load startup modules
-// require('./startup/logging')();
+require('./startup/logging')();
 require('./startup/routes')(app);
 require('./startup/db')();
 require('./startup/config')();
