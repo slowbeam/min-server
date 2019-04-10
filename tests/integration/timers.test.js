@@ -258,20 +258,5 @@ describe('/api/v1/timers', () => {
             const res = await exec();
             expect(res.status).toBe(404);
         });
-        // it ('should update the timer if it is valid', async () => {
-        //     const res = await exec();
-        //     const updatedTimer = await Timer.findById(timer._id);
-        //     expect(updatedTimer.intervalNum).toBe(22222);
-        // });
-        // it ('should return the timer if it is valid', async () => {
-        //     const res = await exec();
-        //     expect(res.body).toHaveProperty('_id');
-        //     expect(res.body).toHaveProperty('isPomodoro', false);
-        //     expect(res.body).toHaveProperty('currentTime', 10);
-        //     expect(res.body).toHaveProperty('intervalNum', 11111);
-        //     expect(res.body).toHaveProperty('timerHours', '10');
-        //     expect(res.body).toHaveProperty('timerMinutes', '10');
-        //     expect(res.body).toHaveProperty('timerSeconds', '10');
-        // });
     });
 });
