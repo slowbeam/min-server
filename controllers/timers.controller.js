@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const {Timer, validate} = require("../models/timer.model.js");
 const { User } = require("../models/user.model.js");
 
+// Assign the x-auth-token to the headers of the response
+const assignTokenToResponseHeaders = (req, res) => {
+    let header = req.headers['x-auth-token'] || "";
+    res.set('x-auth-token', header);
+};
+
 // Public Route: GET 'api/v1/timers'
 exports.getTimers = async (req, res) => {
     const timers = await Timer.find();
@@ -48,6 +54,9 @@ exports.createTimer = async (req, res) => {
     });
     
     timer = await timer.save();
+
+    assignTokenToResponseHeaders(req, res);
+
     res.send(timer);
 };
 
@@ -82,6 +91,9 @@ exports.updateTimer = async (req, res) => {
         { $set: timerFields },
         { new: true }
     );
+
+    assignTokenToResponseHeaders(req, res);
+
     res.send(timer); 
 };
 
@@ -89,5 +101,8 @@ exports.updateTimer = async (req, res) => {
 exports.deleteTimer = async (req, res) => {
     const timer = await Timer.findOneAndDelete({ _id: req.params.id });
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
+
+    assignTokenToResponseHeaders(req, res);
+
     res.send(timer);
 };

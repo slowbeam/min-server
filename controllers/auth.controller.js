@@ -15,14 +15,8 @@ exports.logIn = async (req, res) => {
     if (!validPassword) res.status(400).send('Invalid email or password.');
 
     const token = user.generateAuthToken();
-    const resObj = {
-        token: token,
-        user: {
-            name: user.name,
-            email: user.email
-        }
-    };
-    res.send(resObj);
+
+    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
 };
 
 function validate(req) {
