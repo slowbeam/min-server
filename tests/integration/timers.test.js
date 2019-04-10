@@ -211,7 +211,7 @@ describe('/api/v1/timers', () => {
                 timerSeconds: '10'
             });
 
-            timer = await timer.save();
+            await timer.save();
             token = user.generateAuthToken();
             id = timer._id;
             newPomodoro = true;
@@ -278,6 +278,74 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty("timerHours");
             expect(res.body).toHaveProperty("timerMinutes");
             expect(res.body).toHaveProperty("timerSeconds");
+        });
+    });
+    describe('DELETE /:id', () => {
+
+        // Define the happy path, and before each test, change one parameter that clearly aligns with the test
+        let token;
+        let timer;
+        let user;
+        let id;
+
+        const exec = async () => {
+            return await request(server)
+                .delete('/api/v1/timers/' + id)
+                .set('x-auth-token', token)
+                .send();
+        }
+
+        beforeEach( async() => {
+            // Before each test we create a user and timer and save them to the database
+            user = new User({
+                name: "name name",
+                email: "name@gmail.com",
+                password: "123456"
+            });
+
+            await user.save();
+
+            timer = new Timer({
+                user: user, 
+                isPomodoro: false,
+                currentTime: 10,
+                intervalNum: 11111,
+                timerHours: "10",
+                timerMinutes: '10',
+                timerSeconds: '10'
+            });
+
+            await timer.save();
+            token = user.generateAuthToken();
+            id = timer._id;
+        });
+
+        it('should return 401 if client is not logged in', async () => {
+            token = '';
+            const res = await exec(); 
+            expect(res.status).toBe(401);
+        });
+        it('should return 404 if id is invalid', async () => {
+            id = 1;
+            const res = await exec();
+            expect(res.status).toBe(404);
+        });
+        it('should delete the timer if input is valid', async () => {
+            await exec();
+
+            const timerInDB = await Timer.findById(id);
+            expect(timerInDB).toBeNull();
+        });
+        it('should return the removed timer if input is valid', async () => {
+            const res = await exec();
+
+            expect(res.body).toHaveProperty('_id', timer._id.toHexString());
+            expect(res.body).toHaveProperty('isPomodoro', false);
+            expect(res.body).toHaveProperty('currentTime', 10);
+            expect(res.body).toHaveProperty('intervalNum', 11111);
+            expect(res.body).toHaveProperty("timerHours", "10");
+            expect(res.body).toHaveProperty("timerMinutes", "10");
+            expect(res.body).toHaveProperty("timerSeconds", "10");
         });
     });
 });
