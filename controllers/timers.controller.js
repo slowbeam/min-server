@@ -24,9 +24,6 @@ exports.getTimer = async (req, res) => {
 
 // Private Route: POST 'api/v1/timers'
 exports.createTimer = async (req, res) => {
-    const {error} = validate(req.body);
-    if (error) return res.status(400).json(error);
-
     let user = await User.findById(req.body.userId);
     if (!user) return res.status(400).send('Invalid user');
 
@@ -62,9 +59,6 @@ exports.createTimer = async (req, res) => {
 
 // Private Route: PUT 'api/v1/timers/:id'
 exports.updateTimer = async (req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
     let timer = await Timer.findById(req.params.id);
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
