@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {Timer, validate} = require("../models/timer.model.js");
+const {Timer} = require("../models/timer.model.js");
 const { User } = require("../models/user.model.js");
 
 // Assign the x-auth-token to the headers of the response

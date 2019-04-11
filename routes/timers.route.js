@@ -2,8 +2,8 @@ const router = require('express').Router();
 const timerController = require("../controllers/timers.controller");
 const auth = require('../middleware/auth');
 const validator = require('../middleware/validate');
-const validateObjectId = require('../middleware/validateObjectId');
 const {validate} = require("../models/timer.model.js");
+const validateObjectId = require('../middleware/validateObjectId');
 
 // Public Routes
 router.get("/", timerController.getTimers);

@@ -1,4 +1,4 @@
-const {User, validate}= require("../models/user.model");
+const {User}= require("../models/user.model");
 const _ = require('lodash');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
@@ -10,10 +10,7 @@ const assignTokenToResponseHeaders = (req, res) => {
 };
 
 // Register a new user, Public Route: POST 'api/v1/users'
-exports.createUser = async (req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-    
+exports.createUser = async (req, res) => {  
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(400).send('A user with this email already exists.');
 
