@@ -8,9 +8,9 @@ describe('/api/v1/timers', () => {
     beforeEach(() => { server = require('../../index'); });
     
     afterEach( async() => { 
-        server.close(); 
+        await server.close();
         await Timer.remove({});
-        await User.remove({});
+        await User.remove({}); 
     });
 
     describe('GET /', () => {

@@ -5,9 +5,9 @@ const {User} = require('../../models/user.model');
 describe('auth middleware', () => {
     beforeEach(() => { server = require('../../index'); }); 
     afterEach(async () => { 
-        server.close();
-        await Timer.deleteMany({});
-        await User.deleteMany({});
+        await server.close();
+        await Timer.remove({});
+        await User.remove({});   
     });
 
     let token; 
