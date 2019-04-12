@@ -2,7 +2,6 @@ const Joi = require('joi');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const {User}= require('../models/user.model');
-const handleResponseHeaders = require('../middleware/handleResponseHeaders');
 
 // Login a user, Public Route 'api/v1/auth'
 exports.logIn = async (req, res) => {
@@ -17,9 +16,9 @@ exports.logIn = async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    handleResponseHeaders(req, res, {
+    res.set({
         'Access-Control-Expose-Headers': 'x-auth-token',
-        'x-auth-token': token     
+        'x-auth-token': token
     });
 
     res.send(_.pick(user, ['_id', 'name', 'email']));

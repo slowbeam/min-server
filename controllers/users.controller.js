@@ -2,7 +2,7 @@ const {User}= require("../models/user.model");
 const _ = require('lodash');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-const handleResponseHeaders = require('../middleware/handleResponseHeaders');
+const assignTokenToResponseHeaders = require('../middleware/assignTokenToResponseHeaders');
 
 // Register a new user, Public Route: POST 'api/v1/users'
 exports.createUser = async (req, res) => {  
@@ -18,9 +18,9 @@ exports.createUser = async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    handleResponseHeaders(req, res, {
-        'x-auth-token': token, 
-        'Access-Control-Expose-Headers': 'x-auth-token'
+    res.set({
+        'Access-Control-Expose-Headers': 'x-auth-token',
+        'x-auth-token': token
     });
     
     res.send(_.pick(user, ['_id', 'name', 'email']));   
@@ -30,7 +30,8 @@ exports.createUser = async (req, res) => {
 exports.getUsers = async (req, res) => {
     const users = await User.find().sort({ name: 1});
 
-    handleResponseHeaders(req, res, {});
+    res.set('Access-Control-Expose-Headers', 'x-auth-token');
+    assignTokenToResponseHeaders(req, res);
 
     res.send(users);
 };
@@ -39,7 +40,8 @@ exports.getUsers = async (req, res) => {
 exports.getCurrentUser = async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
 
-    handleResponseHeaders(req, res, {'Access-Control-Expose-Headers': 'x-auth-token'});
+    res.set('Access-Control-Expose-Headers', 'x-auth-token');
+    assignTokenToResponseHeaders(req, res);
 
     res.send(user);
 };
