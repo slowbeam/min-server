@@ -1656,3 +1656,21 @@
 {"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-11T21:56:09.374Z"}
 {"level":"error","timestamp":"2019-04-11T21:56:09.403Z"}
 {"level":"error","timestamp":"2019-04-11T21:56:09.422Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:51:33.347Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:51:33.364Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:51:50.985Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:51:51.005Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:52:25.852Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:52:25.874Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:53:50.913Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:53:50.943Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:55:50.200Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:55:50.229Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T13:58:06.435Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T13:58:06.455Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T14:02:03.280Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T14:02:03.306Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T14:02:27.552Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-12T14:02:27.576Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-12T14:02:40.703Z"}
+{"level":"info","message":"Connected to mongodb://sandy:c0d3lyf3@ds249418.mlab.com:49418/heroku_c2pzj4cv...","timestamp":"2019-04-12T14:02:40.834Z"}

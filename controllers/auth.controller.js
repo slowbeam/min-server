@@ -18,8 +18,8 @@ exports.logIn = async (req, res) => {
     const token = user.generateAuthToken();
 
     handleResponseHeaders(req, res, {
-        'x-auth-token': token, 
-        'Access-Control-Expose-Headers': 'x-auth-token'
+        'Access-Control-Expose-Headers': 'x-auth-token',
+        'x-auth-token': token     
     });
 
     res.send(_.pick(user, ['_id', 'name', 'email']));

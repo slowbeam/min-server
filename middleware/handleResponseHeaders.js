@@ -3,5 +3,8 @@
 module.exports = (req, res, headerObj) => {
     const requestToken = req.headers["x-auth-token"];
     if (requestToken) headerObj["x-auth-token"] = requestToken;
-    res.set(headerObj);
+
+    for (let key in headerObj) {
+        res.set(key, headerObj[key]);
+    }
 };
