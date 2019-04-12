@@ -2,12 +2,7 @@ const {User}= require("../models/user.model");
 const _ = require('lodash');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-
-// Assign the x-auth-token to the headers of the response
-const assignTokenToResponseHeaders = (req, res) => {
-    let header = req.headers['x-auth-token'] || "";
-    res.set('x-auth-token', header);
-};
+const handleResponseHeaders = require('../middleware/handleResponseHeaders');
 
 // Register a new user, Public Route: POST 'api/v1/users'
 exports.createUser = async (req, res) => {  
@@ -22,14 +17,17 @@ exports.createUser = async (req, res) => {
     await user.save();
 
     const token = user.generateAuthToken();
-    res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));   
+
+    handleResponseHeaders(req, res, {'x-auth-token': token});
+    
+    res.send(_.pick(user, ['_id', 'name', 'email']));   
 };
 
 // Private Route: GET 'api/v1/users'
 exports.getUsers = async (req, res) => {
     const users = await User.find().sort({ name: 1});
 
-    assignTokenToResponseHeaders(req, res);
+    handleResponseHeaders(req, res, {});
 
     res.send(users);
 };
@@ -38,7 +36,7 @@ exports.getUsers = async (req, res) => {
 exports.getCurrentUser = async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
 
-    assignTokenToResponseHeaders(req, res);
+    handleResponseHeaders(req, res, {});
 
     res.send(user);
 };

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const {Timer} = require("../models/timer.model.js");
 const { User } = require("../models/user.model.js");
+const handleResponseHeaders = require('../middleware/handleResponseHeaders');
 
 // Assign the x-auth-token to the headers of the response
 const assignTokenToResponseHeaders = (req, res) => {
@@ -52,7 +53,7 @@ exports.createTimer = async (req, res) => {
     
     timer = await timer.save();
 
-    assignTokenToResponseHeaders(req, res);
+    handleResponseHeaders(req, res, {});
 
     res.send(timer);
 };
@@ -86,7 +87,7 @@ exports.updateTimer = async (req, res) => {
         { new: true }
     );
 
-    assignTokenToResponseHeaders(req, res);
+    handleResponseHeaders(req, res, {});
 
     res.send(timer); 
 };
@@ -96,7 +97,7 @@ exports.deleteTimer = async (req, res) => {
     const timer = await Timer.findOneAndDelete({ _id: req.params.id });
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
-    assignTokenToResponseHeaders(req, res);
+    handleResponseHeaders(req, res, {});
 
     res.send(timer);
 };
