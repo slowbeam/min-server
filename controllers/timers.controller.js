@@ -3,12 +3,6 @@ const {Timer} = require("../models/timer.model.js");
 const { User } = require("../models/user.model.js");
 const handleResponseHeaders = require('../middleware/handleResponseHeaders');
 
-// Assign the x-auth-token to the headers of the response
-const assignTokenToResponseHeaders = (req, res) => {
-    let header = req.headers['x-auth-token'] || "";
-    res.set('x-auth-token', header);
-};
-
 // Public Route: GET 'api/v1/timers'
 exports.getTimers = async (req, res) => {
     const timers = await Timer.find();
@@ -53,7 +47,7 @@ exports.createTimer = async (req, res) => {
     
     timer = await timer.save();
 
-    handleResponseHeaders(req, res, {});
+    handleResponseHeaders(req, res, {'Access-Control-Expose-Headers': 'x-auth-token'});
 
     res.send(timer);
 };
@@ -87,7 +81,7 @@ exports.updateTimer = async (req, res) => {
         { new: true }
     );
 
-    handleResponseHeaders(req, res, {});
+    handleResponseHeaders(req, res, {'Access-Control-Expose-Headers': 'x-auth-token'});
 
     res.send(timer); 
 };
@@ -97,7 +91,7 @@ exports.deleteTimer = async (req, res) => {
     const timer = await Timer.findOneAndDelete({ _id: req.params.id });
     if (!timer) return res.status(404).send('The timer with the provided ID was not found.');
 
-    handleResponseHeaders(req, res, {});
+    handleResponseHeaders(req, res, {'Access-Control-Expose-Headers': 'x-auth-token'});
 
     res.send(timer);
 };

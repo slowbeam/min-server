@@ -18,7 +18,10 @@ exports.createUser = async (req, res) => {
 
     const token = user.generateAuthToken();
 
-    handleResponseHeaders(req, res, {'x-auth-token': token});
+    handleResponseHeaders(req, res, {
+        'x-auth-token': token, 
+        'Access-Control-Expose-Headers': 'x-auth-token'
+    });
     
     res.send(_.pick(user, ['_id', 'name', 'email']));   
 };
@@ -36,7 +39,7 @@ exports.getUsers = async (req, res) => {
 exports.getCurrentUser = async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
 
-    handleResponseHeaders(req, res, {});
+    handleResponseHeaders(req, res, {'Access-Control-Expose-Headers': 'x-auth-token'});
 
     res.send(user);
 };
