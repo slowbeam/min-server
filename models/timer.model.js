@@ -7,7 +7,7 @@ function validateTimer(timer) {
         name: Joi.string().min(1).max(50),
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
-        intervalNum: Joi.number().required(),
+        intervalNum: Joi.number(),
         timerHours: Joi.string().min(1).max(2).required(),
         timerMinutes: Joi.string().min(1).max(2).required(),
         timerSeconds: Joi.string().min(1).max(2).required(),
@@ -54,8 +54,7 @@ const timerSchema = new mongoose.Schema ({
         required: true
     },
     intervalNum: {
-        type: Number,
-        required: true
+        type: Number
     },
     timerHours: {
         type: String,
