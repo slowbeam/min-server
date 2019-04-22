@@ -57,17 +57,17 @@ const timerSchema = new mongoose.Schema ({
         type: Number
     },
     timerHours: {
-        type: String,.required()
+        type: String,
         minlength: 0,
         maxlength: 2
     },
     timerMinutes: {
-        type: String,.required()
+        type: String,
         minlength: 0,
         maxlength: 2
     },
     timerSeconds: {
-        type: String,.required()
+        type: String,
         minlength: 0,
         maxlength: 2
     },
