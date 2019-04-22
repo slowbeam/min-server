@@ -4,13 +4,13 @@ const Joi = require('joi');
 function validateTimer(timer) {
     const schema = { 
         userId: Joi.objectId(),
-        name: Joi.string().min(1).max(50),
+        name: Joi.string().min(1).max(50).allow(''),
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
-        intervalNum: Joi.number(),
-        timerHours: Joi.string().min(1).max(2).required(),
-        timerMinutes: Joi.string().min(1).max(2).required(),
-        timerSeconds: Joi.string().min(1).max(2).required(),
+        intervalNum: Joi.number().allow(null),
+        timerHours: Joi.string().min(0).max(2).allow('').required(),
+        timerMinutes: Joi.string().min(0).max(2).allow('').required(),
+        timerSeconds: Joi.string().min(0).max(2).allow('').required(),
         breakTime: Joi.number(),
         breakLength: Joi.number(),
         breakMinutes: Joi.string().min(1).max(2),
@@ -59,19 +59,19 @@ const timerSchema = new mongoose.Schema ({
     timerHours: {
         type: String,
         required: true,
-        minlength: 1,
+        minlength: 0,
         maxlength: 2
     },
     timerMinutes: {
         type: String,
         required: true,
-        minlength: 1,
+        minlength: 0,
         maxlength: 2
     },
     timerSeconds: {
         type: String,
         required: true,
-        minlength: 1,
+        minlength: 0,
         maxlength: 2
     },
     breakTime: {
