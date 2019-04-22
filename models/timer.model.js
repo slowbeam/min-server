@@ -13,10 +13,10 @@ function validateTimer(timer) {
         timerSeconds: Joi.string().min(0).max(2).allow('').required(),
         breakTime: Joi.number(),
         breakLength: Joi.number(),
-        breakMinutes: Joi.string().min(1).max(2),
+        breakMinutes: Joi.string().min(0).max(2).allow(''),
         longBreakTime: Joi.number(),
         longBreakLength: Joi.number(),
-        longBreakMinutes: Joi.string().min(1).max(2),
+        longBreakMinutes: Joi.string().min(0).max(2).allow(''),
         isBreak: Joi.boolean(),
         isLongBreak: Joi.boolean(),
         pomCount: Joi.number()
@@ -84,9 +84,9 @@ const timerSchema = new mongoose.Schema ({
     },
     breakMinutes: {
         type: String,
-        minlength: 1,
+        minlength: 0,
         maxlength: 2,
-        default: "00"
+        default: ""
     },
     longBreakTime: {
         type: Number,
@@ -98,9 +98,9 @@ const timerSchema = new mongoose.Schema ({
     },
     longBreakMinutes: {
         type: String,
-        minlength: 1,
+        minlength: 0,
         maxlength: 2,
-        default: "00"
+        default: ""
     },
     isBreak: {
         type: Boolean,
