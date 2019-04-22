@@ -3,7 +3,8 @@ const Joi = require('joi');
 
 function validateTimer(timer) {
     const schema = { 
-        userId: Joi.objectId(), 
+        userId: Joi.objectId(),
+        name: Joi.string().min(1).max(50),
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
         intervalNum: Joi.number().required(),
@@ -37,6 +38,12 @@ const timerSchema = new mongoose.Schema ({
             }
         }),
         required: true
+    },
+    name: {
+        type: String,
+        minlength: 1,
+        maxlength: 50,
+        default: ""
     },
     isPomodoro: {
         type: Boolean,

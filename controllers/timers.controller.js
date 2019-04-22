@@ -28,6 +28,7 @@ exports.createTimer = async (req, res) => {
             name: user.name,
             email: user.email
         },
+        name: req.body.name,
         currentTime: req.body.currentTime,
         intervalNum: req.body.intervalNum,
         timerHours: req.body.timerHours,
@@ -60,6 +61,7 @@ exports.updateTimer = async (req, res) => {
 
     const timerFields = {};
 
+    timerFields.name = req.body.name || timer.name;
     timerFields.isPomodoro = req.body.isPomodoro || timer.isPomodoro;
     timerFields.currentTime = req.body.currentTime || timer.currentTime;
     timerFields.intervalNum = req.body.intervalNum || timer.intervalNum;
