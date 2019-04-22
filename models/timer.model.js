@@ -41,7 +41,7 @@ const timerSchema = new mongoose.Schema ({
     },
     name: {
         type: String,
-        minlength: 1,
+        minlength: 0,
         maxlength: 50,
         default: ""
     },
