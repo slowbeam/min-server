@@ -61,23 +61,24 @@ exports.updateTimer = async (req, res) => {
 
     const timerFields = {};
 
-    timerFields.name = req.body.name || timer.name;
-    timerFields.isPomodoro = req.body.isPomodoro || timer.isPomodoro;
-    timerFields.currentTime = req.body.currentTime || timer.currentTime;
-    timerFields.intervalNum = req.body.intervalNum || timer.intervalNum;
-    timerFields.timerHours = req.body.timerHours || timer.timerHours;
-    timerFields.timerMinutes = req.body.timerMinutes || timer.timerMinutes;
-    timerFields.timerSeconds = req.body.timerSeconds || timer.timerSeconds;
-    timerFields.breakTime = req.body.breakTime || timer.breakTime;
-    timerFields.breakMinutes = req.body.breakMinutes || timer.breakMinutes;
-    timerFields.breakTime = req.body.breakTime || timer.breakTime;
-    timerFields.breakLength = req.body.breakLength || timer.breakLength;
-    timerFields.longBreakMinutes = req.body.longBreakMinutes || timer.longBreakMinutes;
-    timerFields.longBreakTime = req.body.longBreakTime || timer.longBreakTime;
-    timerFields.longBreakLength = req.body.longBreakLength || timer.longBreakLength;
-    timerFields.isBreak = req.body.isBreak || timer.isBreak;
-    timerFields.isLongBreak = req.body.isLongBreak || timer.isLongBreak;
-    timerFields.pomCount = req.body.pomCount || timer.pomCount;
+    timerFields.name = req.body.name;
+    timerFields.isPomodoro = req.body.isPomodoro;
+    timerFields.pomLength = req.body.pomLength;
+    timerFields.currentTime = req.body.currentTime;
+    timerFields.intervalNum = req.body.intervalNum;
+    timerFields.timerHours = req.body.timerHours;
+    timerFields.timerMinutes = req.body.timerMinutes;
+    timerFields.timerSeconds = req.body.timerSeconds;
+    timerFields.breakTime = req.body.breakTime;
+    timerFields.breakMinutes = req.body.breakMinutes;
+    timerFields.breakTime = req.body.breakTime;
+    timerFields.breakLength = req.body.breakLength;
+    timerFields.longBreakMinutes = req.body.longBreakMinutes;
+    timerFields.longBreakTime = req.body.longBreakTime;
+    timerFields.longBreakLength = req.body.longBreakLength;
+    timerFields.isBreak = req.body.isBreak;
+    timerFields.isLongBreak = req.body.isLongBreak;
+    timerFields.pomCount = req.body.pomCount;
 
     timer = await Timer.findByIdAndUpdate( req.params.id,
         { $set: timerFields },

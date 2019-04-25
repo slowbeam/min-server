@@ -33,6 +33,27 @@ exports.getUserMultiTimers = async (req, res) => {
 
     if (!user) res.status(404).send("The user with the provided ID was not found.");
 
+    if (user.new) {
+        const emptyTimerObj = {
+            user: user,
+            name: "",
+            isPomodoro: false,
+            currentTime: 0, 
+            intervalNum: null,
+            timerRunning: false,
+            timerHours: "",
+            timerMinutes: "",
+            timerSeconds: ""
+        };
+        timer1 = new Timer(emptyTimerObj);
+        timer2 = new Timer(emptyTimerObj);
+        await timer1.save();
+        await timer2.save();
+
+        user.new = false;
+        await user.save();
+    }
+
     const timers = await Timer.find({user: user, isPomodoro: false});
 
     res.set('Access-Control-Expose-Headers', 'x-auth-token');
