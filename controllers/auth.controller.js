@@ -14,6 +14,11 @@ exports.logIn = async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) res.status(400).send('Invalid email or password.');
 
+    if (user.new) {
+        user.new = false;
+        await user.save();
+    }
+    
     const token = user.generateAuthToken();
 
     res.set({
@@ -21,7 +26,7 @@ exports.logIn = async (req, res) => {
         'x-auth-token': token
     });
 
-    res.send(_.pick(user, ['_id', 'name', 'email']));
+    res.send(_.pick(user, ['_id', 'name', 'email', 'new']));
 };
 
 function validate(req) {

@@ -23,7 +23,7 @@ exports.createUser = async (req, res) => {
         'x-auth-token': token
     });
     
-    res.send(_.pick(user, ['_id', 'name', 'email']));   
+    res.send(_.pick(user, ['_id', 'name', 'email', 'new']));   
 };
 
 // Private Route: GET 'api/v1/users'
