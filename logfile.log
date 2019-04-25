@@ -1714,3 +1714,38 @@
 {"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:01:50.990Z"}
 {"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:03:19.169Z"}
 {"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:03:19.191Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:56:49.538Z"}
+{"level":"info","message":"Connected to mongodb://sandy:c0d3lyf3@ds249418.mlab.com:49418/heroku_c2pzj4cv...","timestamp":"2019-04-25T14:56:52.619Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:56:59.728Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:56:59.751Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:57:12.600Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:57:12.624Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:58:25.681Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:58:25.704Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:59:16.569Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:59:16.589Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T14:59:19.649Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T14:59:19.671Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T15:02:20.752Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T15:02:20.772Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T15:23:07.423Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T15:23:07.443Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T15:26:06.791Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T15:26:06.811Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:34:48.140Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:34:48.162Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:35:52.987Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:35:53.011Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:36:11.755Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:36:11.776Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:37:55.760Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:37:55.780Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:38:02.817Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:38:02.841Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T17:43:16.593Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T17:43:16.614Z"}
+{"message":"Cannot set headers after they are sent to the client","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at ServerResponse.setHeader (_http_outgoing.js:482:11)\n    at ServerResponse.header (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/response.js:767:10)\n    at ServerResponse.send (/Users/esandy/Desktop/projects/mins/server/node_modules/express/lib/response.js:170:12)\n    at exports.getTimer (/Users/esandy/Desktop/projects/mins/server/controllers/timers.controller.js:17:9)\n    at processTicksAndRejections (internal/process/next_tick.js:81:5)","level":"error","timestamp":"2019-04-25T18:26:56.858Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T19:12:13.929Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T19:12:13.946Z"}
+{"level":"info","message":"CORS-enabled server is running on port 3001...","timestamp":"2019-04-25T19:12:16.304Z"}
+{"level":"info","message":"Connected to mongodb://localhost/min...","timestamp":"2019-04-25T19:12:16.327Z"}

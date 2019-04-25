@@ -10,5 +10,7 @@ router.post("/", validator(validate), userController.createUser);
 // Private Routes
 router.get("/me", auth, userController.getCurrentUser);
 router.get("/", auth, userController.getUsers);
+router.get("/:id/multitimers", auth, userController.getUserMultiTimers);
+router.get("/:id/pomodoro", auth, userController.getUserPomodoro);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const {User}= require("../models/user.model");
+const {Timer} = require("../models/timer.model.js");
 const _ = require('lodash');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
@@ -24,6 +25,34 @@ exports.createUser = async (req, res) => {
     });
     
     res.send(_.pick(user, ['_id', 'name', 'email', 'new']));   
+};
+
+// Private Route: GET 'api/v1/users/:id/multitimers'
+exports.getUserMultiTimers = async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) res.status(404).send("The user with the provided ID was not found.");
+
+    const timers = await Timer.find({user: user, isPomodoro: false});
+
+    res.set('Access-Control-Expose-Headers', 'x-auth-token');
+    assignTokenToResponseHeaders(req, res);
+
+    res.send(timers);
+};
+
+// Private Route: GET 'api/v1/users/:id/pomodoro'
+exports.getUserPomodoro = async (req, res) => {
+    const user = await User.findById(req.params.id);
+
+    if (!user) res.status(404).send("The user with the provided ID was not found.");
+
+    const timer = await Timer.findOne({user: user, isPomodoro: true});
+
+    res.set('Access-Control-Expose-Headers', 'x-auth-token');
+    assignTokenToResponseHeaders(req, res);
+
+    res.send(timer);
 };
 
 // Private Route: GET 'api/v1/users'
