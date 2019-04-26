@@ -17,6 +17,29 @@ exports.createUser = async (req, res) => {
 
     await user.save();
 
+    const emptyTimerObj = {
+        user: user,
+        name: "",
+        isPomodoro: false,
+        currentTime: 0, 
+        intervalNum: null,
+        timerRunning: false,
+        timerHours: "",
+        timerMinutes: "",
+        timerSeconds: ""
+    };
+
+    const emptyPomObject = Object.assign({}, emptyTimerObj);
+    emptyPomObject.isPomodoro = true;
+
+    const pomodoro = new Timer(emptyPomObject);
+    await pomodoro.save();
+
+    timer1 = new Timer(emptyTimerObj);
+    timer2 = new Timer(emptyTimerObj);
+    await timer1.save();
+    await timer2.save();
+
     const token = user.generateAuthToken();
 
     res.set({
@@ -32,27 +55,6 @@ exports.getUserMultiTimers = async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (!user) res.status(404).send("The user with the provided ID was not found.");
-
-    if (user.new) {
-        const emptyTimerObj = {
-            user: user,
-            name: "",
-            isPomodoro: false,
-            currentTime: 0, 
-            intervalNum: null,
-            timerRunning: false,
-            timerHours: "",
-            timerMinutes: "",
-            timerSeconds: ""
-        };
-        timer1 = new Timer(emptyTimerObj);
-        timer2 = new Timer(emptyTimerObj);
-        await timer1.save();
-        await timer2.save();
-
-        user.new = false;
-        await user.save();
-    }
 
     const timers = await Timer.find({user: user, isPomodoro: false});
 
