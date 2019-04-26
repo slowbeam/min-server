@@ -7,19 +7,19 @@ function validateTimer(timer) {
         name: Joi.string().min(1).max(50).allow(''),
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
-        intervalNum: Joi.number().allow(null),
-        timerHours: Joi.string().min(0).max(2).allow('').required(),
-        timerMinutes: Joi.string().min(0).max(2).allow('').required(),
-        timerSeconds: Joi.string().min(0).max(2).allow('').required(),
-        breakTime: Joi.number(),
-        breakLength: Joi.number(),
-        breakMinutes: Joi.string().min(0).max(2).allow(''),
+        intervalNumber: Joi.number().allow(null),
+        hourInput: Joi.string().min(0).max(2).allow('').required(),
+        minuteInput: Joi.string().min(0).max(2).allow('').required(),
+        secondInput: Joi.string().min(0).max(2).allow('').required(),
+        shortBreakTime: Joi.number(),
+        shortBreakLength: Joi.number(),
+        shortBreakMinuteInput: Joi.string().min(0).max(2).allow(''),
         longBreakTime: Joi.number(),
         longBreakLength: Joi.number(),
-        longBreakMinutes: Joi.string().min(0).max(2).allow(''),
-        isBreak: Joi.boolean(),
+        longBreakMinuteInput: Joi.string().min(0).max(2).allow(''),
+        isShortBreak: Joi.boolean(),
         isLongBreak: Joi.boolean(),
-        pomCount: Joi.number()
+        pomodoroCounter: Joi.number()
     };
 
     return Joi.validate(timer, schema);
@@ -53,33 +53,33 @@ const timerSchema = new mongoose.Schema ({
         type: Number,
         required: true
     },
-    intervalNum: {
+    intervalNumber: {
         type: Number
     },
-    timerHours: {
+    hourInput: {
         type: String,
         minlength: 0,
         maxlength: 2
     },
-    timerMinutes: {
+    minuteInput: {
         type: String,
         minlength: 0,
         maxlength: 2
     },
-    timerSeconds: {
+    secondInput: {
         type: String,
         minlength: 0,
         maxlength: 2
     },
-    breakTime: {
+    shortBreakTime: {
         type: Number,
         default: 0
     },
-    breakLength: {
+    shortBreakLength: {
         type: Number,
         default: 0
     },
-    breakMinutes: {
+    shortBreakMinuteInput: {
         type: String,
         minlength: 0,
         maxlength: 2,
@@ -93,13 +93,13 @@ const timerSchema = new mongoose.Schema ({
         type: Number,
         default: 0
     },
-    longBreakMinutes: {
+    longBreakMinuteInput: {
         type: String,
         minlength: 0,
         maxlength: 2,
         default: ""
     },
-    isBreak: {
+    isShortBreak: {
         type: Boolean,
         default: false
     },
@@ -107,7 +107,7 @@ const timerSchema = new mongoose.Schema ({
         type: Boolean,
         default: false
     },
-    pomCount: {
+    pomodoroCounter: {
         type: Number,
         default: 0
     }

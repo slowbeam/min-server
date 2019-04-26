@@ -32,19 +32,19 @@ describe('/api/v1/timers', () => {
                     user: user1, 
                     isPomodoro: false, 
                     currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: '10',
-                    timerMinutes: '10',
-                    timerSeconds: '10'
+                    intervalNumber: 11111,
+                    hourInput: '10',
+                    minuteInput: '10',
+                    secondInput: '10'
                 },
                 { 
                     user: user2, 
                     isPomodoro: false, 
                     currentTime: 20,
-                    intervalNum: 22222,
-                    timerHours: '20',
-                    timerMinutes: '20',
-                    timerSeconds: '20'
+                    intervalNumber: 22222,
+                    hourInput: '20',
+                    minuteInput: '20',
+                    secondInput: '20'
                 }
             ]);
             const res = await request(server).get('/api/v1/timers');
@@ -65,16 +65,16 @@ describe('/api/v1/timers', () => {
                     user: user, 
                     isPomodoro: false, 
                     currentTime: 10,
-                    intervalNum: 11111,
-                    timerHours: '10',
-                    timerMinutes: '10',
-                    timerSeconds: '10'
+                    intervalNumber: 11111,
+                    hourInput: '10',
+                    minuteInput: '10',
+                    secondInput: '10'
                 }
             );
             await timer.save();
             const res = await request(server).get('/api/v1/timers/' + timer._id);
             expect(res.status).toBe(200);
-            expect(res.body).toHaveProperty('intervalNum', timer.intervalNum);
+            expect(res.body).toHaveProperty('intervalNumber', timer.intervalNumber);
         });
         it('should return 404 if invalid id is passed', async () => {
             const res = await request(server).get('/api/v1/timers/111111111111111111111111');
@@ -88,8 +88,8 @@ describe('/api/v1/timers', () => {
         let token;
         let isPomodoro;
         let currentTime;
-        let intervalNum;
-        let timerHours;
+        let intervalNumber;
+        let hourInput;
 
         const exec = async () => {
             const user = new User({
@@ -107,10 +107,10 @@ describe('/api/v1/timers', () => {
                     userId: user._id, 
                     isPomodoro: isPomodoro, 
                     currentTime: currentTime,
-                    intervalNum: intervalNum,
-                    timerHours: timerHours,
-                    timerMinutes: '10',
-                    timerSeconds: '10'
+                    intervalNumber: intervalNumber,
+                    hourInput: hourInput,
+                    minuteInput: '10',
+                    secondInput: '10'
             });
         }
 
@@ -118,8 +118,8 @@ describe('/api/v1/timers', () => {
             token = new User().generateAuthToken(); 
             isPomodoro = false;
             currentTime = 10;
-            intervalNum = 11111;
-            timerHours = "10";
+            intervalNumber = 11111;
+            hourInput = "10";
         });
 
         it('should return 401 if client is not logged in', async () => {
@@ -137,19 +137,19 @@ describe('/api/v1/timers', () => {
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if intervalNum is not a number', async () => {
-            intervalNum = 'a';
+        it('should return 400 if intervalNumber is not a number', async () => {
+            intervalNumber = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if timerHours is longer than 2 characters', async () => {
-            timerHours = "000";
+        it('should return 400 if hourInput is longer than 2 characters', async () => {
+            hourInput = "000";
             const res = await exec();
             expect(res.status).toBe(400);
         });
         it('should save the timer if it is valid', async () => {
             await exec();
-            const timer = await Timer.find({ intervalNum: 11111});
+            const timer = await Timer.find({ intervalNumber: 11111});
             expect(timer[0]).not.toBeNull();
         });
         it('should return the timer if it is valid', async () => {
@@ -157,10 +157,10 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('isPomodoro', false);
             expect(res.body).toHaveProperty('currentTime', 10);
-            expect(res.body).toHaveProperty('intervalNum', 11111);
-            expect(res.body).toHaveProperty('timerHours', '10');
-            expect(res.body).toHaveProperty('timerMinutes', '10');
-            expect(res.body).toHaveProperty('timerSeconds', '10');
+            expect(res.body).toHaveProperty('intervalNumber', 11111);
+            expect(res.body).toHaveProperty('hourInput', '10');
+            expect(res.body).toHaveProperty('minuteInput', '10');
+            expect(res.body).toHaveProperty('secondInput', '10');
         });
     });
 
@@ -173,7 +173,7 @@ describe('/api/v1/timers', () => {
         let id;
         let newPomodoro;
         let newCurrentTime;
-        let newIntervalNum;
+        let newintervalNumber;
         let newTimerHours;
         let newTimerMinutes;
         let newTimerSeconds;
@@ -185,10 +185,10 @@ describe('/api/v1/timers', () => {
                 .send({
                     isPomodoro: newPomodoro,
                     currentTime: newCurrentTime,
-                    intervalNum: newIntervalNum,
-                    timerHours: newTimerHours,
-                    timerMinutes: newTimerMinutes,
-                    timerSeconds: newTimerSeconds
+                    intervalNumber: newintervalNumber,
+                    hourInput: newTimerHours,
+                    minuteInput: newTimerMinutes,
+                    secondInput: newTimerSeconds
                 });
         }
 
@@ -205,10 +205,10 @@ describe('/api/v1/timers', () => {
                 user: user, 
                 isPomodoro: false,
                 currentTime: 10,
-                intervalNum: 11111,
-                timerHours: "10",
-                timerMinutes: '10',
-                timerSeconds: '10'
+                intervalNumber: 11111,
+                hourInput: "10",
+                minuteInput: '10',
+                secondInput: '10'
             });
 
             await timer.save();
@@ -216,7 +216,7 @@ describe('/api/v1/timers', () => {
             id = timer._id;
             newPomodoro = true;
             newCurrentTime = 20;
-            newIntervalNum = 22222;
+            newintervalNumber = 22222;
             newTimerHours = "20";
             newTimerMinutes = "20";
             newTimerSeconds = "20";
@@ -237,19 +237,19 @@ describe('/api/v1/timers', () => {
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if intervalNum is not a number', async () => {
-            newIntervalNum = 'a';
+        it('should return 400 if intervalNumber is not a number', async () => {
+            newintervalNumber = 'a';
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if timerHours is longer than 2 characters', async () => {
+        it('should return 400 if hourInput is longer than 2 characters', async () => {
             newTimerHours = "000";
             const res = await exec();
             expect(res.status).toBe(400);
         });
         it('should save the timer if it is valid', async () => {
             await exec();
-            const timer = await Timer.find({ intervalNum: 11111});
+            const timer = await Timer.find({ intervalNumber: 11111});
             expect(timer[0]).not.toBeNull();
         });
         it('should return 404 if id is invalid', async () => {
@@ -263,10 +263,10 @@ describe('/api/v1/timers', () => {
             const updatedTimer = await Timer.findById(id);
             expect(updatedTimer.isPomodoro).toBe(true);
             expect(updatedTimer.currentTime).toBe(20);
-            expect(updatedTimer.intervalNum).toBe(22222);
-            expect(updatedTimer.timerHours).toBe("20");
-            expect(updatedTimer.timerMinutes).toBe("20");
-            expect(updatedTimer.timerSeconds).toBe("20");
+            expect(updatedTimer.intervalNumber).toBe(22222);
+            expect(updatedTimer.hourInput).toBe("20");
+            expect(updatedTimer.minuteInput).toBe("20");
+            expect(updatedTimer.secondInput).toBe("20");
         });
         it('should return the updated timer if input is valid', async () => {
             const res = await exec();
@@ -274,10 +274,10 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('_id');
             expect(res.body).toHaveProperty('isPomodoro');
             expect(res.body).toHaveProperty('currentTime');
-            expect(res.body).toHaveProperty('intervalNum');
-            expect(res.body).toHaveProperty("timerHours");
-            expect(res.body).toHaveProperty("timerMinutes");
-            expect(res.body).toHaveProperty("timerSeconds");
+            expect(res.body).toHaveProperty('intervalNumber');
+            expect(res.body).toHaveProperty("hourInput");
+            expect(res.body).toHaveProperty("minuteInput");
+            expect(res.body).toHaveProperty("secondInput");
         });
     });
     describe('DELETE /:id', () => {
@@ -309,10 +309,10 @@ describe('/api/v1/timers', () => {
                 user: user, 
                 isPomodoro: false,
                 currentTime: 10,
-                intervalNum: 11111,
-                timerHours: "10",
-                timerMinutes: '10',
-                timerSeconds: '10'
+                intervalNumber: 11111,
+                hourInput: "10",
+                minuteInput: '10',
+                secondInput: '10'
             });
 
             await timer.save();
@@ -342,10 +342,10 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('_id', timer._id.toHexString());
             expect(res.body).toHaveProperty('isPomodoro', false);
             expect(res.body).toHaveProperty('currentTime', 10);
-            expect(res.body).toHaveProperty('intervalNum', 11111);
-            expect(res.body).toHaveProperty("timerHours", "10");
-            expect(res.body).toHaveProperty("timerMinutes", "10");
-            expect(res.body).toHaveProperty("timerSeconds", "10");
+            expect(res.body).toHaveProperty('intervalNumber', 11111);
+            expect(res.body).toHaveProperty("hourInput", "10");
+            expect(res.body).toHaveProperty("minuteInput", "10");
+            expect(res.body).toHaveProperty("secondInput", "10");
         });
     });
 });

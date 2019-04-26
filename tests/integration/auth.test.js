@@ -28,10 +28,10 @@ describe('auth middleware', () => {
                 userId: user._id, 
                 isPomodoro: false, 
                 currentTime: 10,
-                intervalNum: 11111,
-                timerHours: '10',
-                timerMinutes: '10',
-                timerSeconds: '10'
+                intervalNumber: 11111,
+                hourInput: '10',
+                minuteInput: '10',
+                secondInput: '10'
         });
     }
 

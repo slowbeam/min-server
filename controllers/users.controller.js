@@ -22,11 +22,11 @@ exports.createUser = async (req, res) => {
         name: "",
         isPomodoro: false,
         currentTime: 0, 
-        intervalNum: null,
+        intervalNumber: null,
         timerRunning: false,
-        timerHours: "",
-        timerMinutes: "",
-        timerSeconds: ""
+        hourInput: "",
+        minuteInput: "",
+        secondInput: ""
     };
 
     const emptyPomObject = Object.assign({}, emptyTimerObj);
