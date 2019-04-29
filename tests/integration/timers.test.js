@@ -33,18 +33,18 @@ describe('/api/v1/timers', () => {
                     isPomodoro: false, 
                     currentTime: 10,
                     intervalNumber: 11111,
-                    hourInput: '10',
-                    minuteInput: '10',
-                    secondInput: '10'
+                    hours: '10',
+                    minutes: '10',
+                    seconds: '10'
                 },
                 { 
                     user: user2, 
                     isPomodoro: false, 
                     currentTime: 20,
                     intervalNumber: 22222,
-                    hourInput: '20',
-                    minuteInput: '20',
-                    secondInput: '20'
+                    hours: '20',
+                    minutes: '20',
+                    seconds: '20'
                 }
             ]);
             const res = await request(server).get('/api/v1/timers');
@@ -66,9 +66,9 @@ describe('/api/v1/timers', () => {
                     isPomodoro: false, 
                     currentTime: 10,
                     intervalNumber: 11111,
-                    hourInput: '10',
-                    minuteInput: '10',
-                    secondInput: '10'
+                    hours: '10',
+                    minutes: '10',
+                    seconds: '10'
                 }
             );
             await timer.save();
@@ -89,7 +89,7 @@ describe('/api/v1/timers', () => {
         let isPomodoro;
         let currentTime;
         let intervalNumber;
-        let hourInput;
+        let hours;
 
         const exec = async () => {
             const user = new User({
@@ -108,9 +108,9 @@ describe('/api/v1/timers', () => {
                     isPomodoro: isPomodoro, 
                     currentTime: currentTime,
                     intervalNumber: intervalNumber,
-                    hourInput: hourInput,
-                    minuteInput: '10',
-                    secondInput: '10'
+                    hours: hours,
+                    minutes: '10',
+                    seconds: '10'
             });
         }
 
@@ -119,7 +119,7 @@ describe('/api/v1/timers', () => {
             isPomodoro = false;
             currentTime = 10;
             intervalNumber = 11111;
-            hourInput = "10";
+            hours = "10";
         });
 
         it('should return 401 if client is not logged in', async () => {
@@ -142,8 +142,8 @@ describe('/api/v1/timers', () => {
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if hourInput is longer than 2 characters', async () => {
-            hourInput = "000";
+        it('should return 400 if hours is longer than 2 characters', async () => {
+            hours = "000";
             const res = await exec();
             expect(res.status).toBe(400);
         });
@@ -158,9 +158,9 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('isPomodoro', false);
             expect(res.body).toHaveProperty('currentTime', 10);
             expect(res.body).toHaveProperty('intervalNumber', 11111);
-            expect(res.body).toHaveProperty('hourInput', '10');
-            expect(res.body).toHaveProperty('minuteInput', '10');
-            expect(res.body).toHaveProperty('secondInput', '10');
+            expect(res.body).toHaveProperty('hours', '10');
+            expect(res.body).toHaveProperty('minutes', '10');
+            expect(res.body).toHaveProperty('seconds', '10');
         });
     });
 
@@ -186,9 +186,9 @@ describe('/api/v1/timers', () => {
                     isPomodoro: newPomodoro,
                     currentTime: newCurrentTime,
                     intervalNumber: newintervalNumber,
-                    hourInput: newTimerHours,
-                    minuteInput: newTimerMinutes,
-                    secondInput: newTimerSeconds
+                    hours: newTimerHours,
+                    minutes: newTimerMinutes,
+                    seconds: newTimerSeconds
                 });
         }
 
@@ -206,9 +206,9 @@ describe('/api/v1/timers', () => {
                 isPomodoro: false,
                 currentTime: 10,
                 intervalNumber: 11111,
-                hourInput: "10",
-                minuteInput: '10',
-                secondInput: '10'
+                hours: "10",
+                minutes: '10',
+                seconds: '10'
             });
 
             await timer.save();
@@ -242,7 +242,7 @@ describe('/api/v1/timers', () => {
             const res = await exec();
             expect(res.status).toBe(400);
         });
-        it('should return 400 if hourInput is longer than 2 characters', async () => {
+        it('should return 400 if hours is longer than 2 characters', async () => {
             newTimerHours = "000";
             const res = await exec();
             expect(res.status).toBe(400);
@@ -264,9 +264,9 @@ describe('/api/v1/timers', () => {
             expect(updatedTimer.isPomodoro).toBe(true);
             expect(updatedTimer.currentTime).toBe(20);
             expect(updatedTimer.intervalNumber).toBe(22222);
-            expect(updatedTimer.hourInput).toBe("20");
-            expect(updatedTimer.minuteInput).toBe("20");
-            expect(updatedTimer.secondInput).toBe("20");
+            expect(updatedTimer.hours).toBe("20");
+            expect(updatedTimer.minutes).toBe("20");
+            expect(updatedTimer.seconds).toBe("20");
         });
         it('should return the updated timer if input is valid', async () => {
             const res = await exec();
@@ -275,9 +275,9 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('isPomodoro');
             expect(res.body).toHaveProperty('currentTime');
             expect(res.body).toHaveProperty('intervalNumber');
-            expect(res.body).toHaveProperty("hourInput");
-            expect(res.body).toHaveProperty("minuteInput");
-            expect(res.body).toHaveProperty("secondInput");
+            expect(res.body).toHaveProperty("hours");
+            expect(res.body).toHaveProperty("minutes");
+            expect(res.body).toHaveProperty("seconds");
         });
     });
     describe('DELETE /:id', () => {
@@ -310,9 +310,9 @@ describe('/api/v1/timers', () => {
                 isPomodoro: false,
                 currentTime: 10,
                 intervalNumber: 11111,
-                hourInput: "10",
-                minuteInput: '10',
-                secondInput: '10'
+                hours: "10",
+                minutes: '10',
+                seconds: '10'
             });
 
             await timer.save();
@@ -343,9 +343,9 @@ describe('/api/v1/timers', () => {
             expect(res.body).toHaveProperty('isPomodoro', false);
             expect(res.body).toHaveProperty('currentTime', 10);
             expect(res.body).toHaveProperty('intervalNumber', 11111);
-            expect(res.body).toHaveProperty("hourInput", "10");
-            expect(res.body).toHaveProperty("minuteInput", "10");
-            expect(res.body).toHaveProperty("secondInput", "10");
+            expect(res.body).toHaveProperty("hours", "10");
+            expect(res.body).toHaveProperty("minutes", "10");
+            expect(res.body).toHaveProperty("seconds", "10");
         });
     });
 });

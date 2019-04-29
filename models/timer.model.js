@@ -8,15 +8,15 @@ function validateTimer(timer) {
         isPomodoro: Joi.boolean().required(),
         currentTime: Joi.number().required(),
         intervalNumber: Joi.number().allow(null),
-        hourInput: Joi.string().min(0).max(2).allow('').required(),
-        minuteInput: Joi.string().min(0).max(2).allow('').required(),
-        secondInput: Joi.string().min(0).max(2).allow('').required(),
+        hours: Joi.string().min(0).max(2).allow('').required(),
+        minutes: Joi.string().min(0).max(2).allow('').required(),
+        seconds: Joi.string().min(0).max(2).allow('').required(),
         shortBreakTime: Joi.number(),
         shortBreakLength: Joi.number(),
-        shortBreakMinuteInput: Joi.string().min(0).max(2).allow(''),
+        shortBreakMinutes: Joi.string().min(0).max(2).allow(''),
         longBreakTime: Joi.number(),
         longBreakLength: Joi.number(),
-        longBreakMinuteInput: Joi.string().min(0).max(2).allow(''),
+        longBreakMinutes: Joi.string().min(0).max(2).allow(''),
         isShortBreak: Joi.boolean(),
         isLongBreak: Joi.boolean(),
         pomodoroCounter: Joi.number()
@@ -56,17 +56,17 @@ const timerSchema = new mongoose.Schema ({
     intervalNumber: {
         type: Number
     },
-    hourInput: {
+    hours: {
         type: String,
         minlength: 0,
         maxlength: 2
     },
-    minuteInput: {
+    minutes: {
         type: String,
         minlength: 0,
         maxlength: 2
     },
-    secondInput: {
+    seconds: {
         type: String,
         minlength: 0,
         maxlength: 2
@@ -79,7 +79,7 @@ const timerSchema = new mongoose.Schema ({
         type: Number,
         default: 0
     },
-    shortBreakMinuteInput: {
+    shortBreakMinutes: {
         type: String,
         minlength: 0,
         maxlength: 2,
@@ -93,7 +93,7 @@ const timerSchema = new mongoose.Schema ({
         type: Number,
         default: 0
     },
-    longBreakMinuteInput: {
+    longBreakMinutes: {
         type: String,
         minlength: 0,
         maxlength: 2,

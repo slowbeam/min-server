@@ -31,16 +31,16 @@ exports.createTimer = async (req, res) => {
         name: req.body.name,
         currentTime: req.body.currentTime,
         intervalNumber: req.body.intervalNumber,
-        hourInput: req.body.hourInput,
-        minuteInput: req.body.minuteInput,
-        secondInput: req.body.secondInput,
+        hours: req.body.hours,
+        minutes: req.body.minutes,
+        seconds: req.body.seconds,
         isPomodoro: req.body.isPomodoro,
         shortBreakTime: req.body.shortBreakTime,
         shortBreakLength: req.body.shortBreakLength,
-        shortBreakMinuteInput: req.body.shortBreakMinuteInput,
+        shortBreakMinutes: req.body.shortBreakMinutes,
         longBreakTime: req.body.longBreakTime,
         longBreakLength: req.body.longBreakLength,
-        longBreakMinuteInput: req.body.longBreakMinuteInput,
+        longBreakMinutes: req.body.longBreakMinutes,
         isShortBreak: req.body.isShortBreak,
         isLongBreak: req.body.isLongBreak,
         pomodoroCounter: req.body.pomodoroCounter
@@ -66,14 +66,14 @@ exports.updateTimer = async (req, res) => {
     timerFields.timerLength = req.body.timerLength;
     timerFields.currentTime = req.body.currentTime;
     timerFields.intervalNumber = req.body.intervalNumber;
-    timerFields.hourInput = req.body.hourInput;
-    timerFields.minuteInput = req.body.minuteInput;
-    timerFields.secondInput = req.body.secondInput;
+    timerFields.hours = req.body.hours;
+    timerFields.minutes = req.body.minutes;
+    timerFields.seconds = req.body.seconds;
     timerFields.shortBreakTime = req.body.shortBreakTime;
-    timerFields.shortBreakMinuteInput = req.body.shortBreakMinuteInput;
+    timerFields.shortBreakMinutes = req.body.shortBreakMinutes;
     timerFields.shortBreakTime = req.body.shortBreakTime;
     timerFields.shortBreakLength = req.body.shortBreakLength;
-    timerFields.longBreakMinuteInput = req.body.longBreakMinuteInput;
+    timerFields.longBreakMinutes = req.body.longBreakMinutes;
     timerFields.longBreakTime = req.body.longBreakTime;
     timerFields.longBreakLength = req.body.longBreakLength;
     timerFields.isShortBreak = req.body.isShortBreak;

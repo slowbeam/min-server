@@ -24,9 +24,9 @@ exports.createUser = async (req, res) => {
         currentTime: 0, 
         intervalNumber: null,
         timerRunning: false,
-        hourInput: "",
-        minuteInput: "",
-        secondInput: ""
+        hours: "",
+        minutes: "",
+        seconds: ""
     };
 
     const emptyPomObject = Object.assign({}, emptyTimerObj);

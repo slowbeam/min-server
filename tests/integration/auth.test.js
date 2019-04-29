@@ -29,9 +29,9 @@ describe('auth middleware', () => {
                 isPomodoro: false, 
                 currentTime: 10,
                 intervalNumber: 11111,
-                hourInput: '10',
-                minuteInput: '10',
-                secondInput: '10'
+                hours: '10',
+                minutes: '10',
+                seconds: '10'
         });
     }
 
