@@ -1,4 +1,4 @@
 {
     "jwtPrivateKey": "",
-    "db": "mongodb://slowbeam:S2cnkks@ds249418.mlab.com:49418/heroku_c2pzj4cv"
+    "db": "mongodb://localhost/min"
 }
