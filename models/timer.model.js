@@ -17,7 +17,7 @@ function validateTimer(timer) {
         longBreakTime: Joi.number(),
         longBreakLength: Joi.number(),
         longBreakMinutes: Joi.string().min(0).max(2).allow(''),
-        isShortBreak: Joi.boolean(),
+        isBreak: Joi.boolean(),
         isLongBreak: Joi.boolean(),
         pomodoroCounter: Joi.number()
     };
@@ -99,7 +99,7 @@ const timerSchema = new mongoose.Schema ({
         maxlength: 2,
         default: ""
     },
-    isShortBreak: {
+    isBreak: {
         type: Boolean,
         default: false
     },

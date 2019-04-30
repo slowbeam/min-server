@@ -41,7 +41,7 @@ exports.createTimer = async (req, res) => {
         longBreakTime: req.body.longBreakTime,
         longBreakLength: req.body.longBreakLength,
         longBreakMinutes: req.body.longBreakMinutes,
-        isShortBreak: req.body.isShortBreak,
+        isBreak: req.body.isBreak,
         isLongBreak: req.body.isLongBreak,
         pomodoroCounter: req.body.pomodoroCounter
     });
@@ -76,7 +76,7 @@ exports.updateTimer = async (req, res) => {
     timerFields.longBreakMinutes = req.body.longBreakMinutes;
     timerFields.longBreakTime = req.body.longBreakTime;
     timerFields.longBreakLength = req.body.longBreakLength;
-    timerFields.isShortBreak = req.body.isShortBreak;
+    timerFields.isBreak = req.body.isBreak;
     timerFields.isLongBreak = req.body.isLongBreak;
     timerFields.pomodoroCounter = req.body.pomodoroCounter;
 
