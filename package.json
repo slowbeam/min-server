@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/slowbeam/min-server#readme",
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.4",
     "config": "^3.0.1",
